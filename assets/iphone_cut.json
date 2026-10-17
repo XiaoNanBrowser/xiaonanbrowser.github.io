@@ -1,0 +1,15 @@
+﻿{
+  "image_format": "png",
+  "image_height": 739,
+  "image_size": 629634,
+  "image_url": "https://mediakit-image.cn-beijing.volces.com/tos-cn-i-mcagdqv95q/veImageX-store/imagesegment/c79eba39-b045-49c4-886c-abcc0bd843ea/811c60860d2d359bf47f656fca5c82fba11c2f9f146ab6da9bc7e3e4ccd5cae6.png~tplv-mcagdqv95q-image.image?sign=1791998135-rand-imagex-79efa40289b3b475741e203c828ca044",
+  "image_width": 740,
+  "request_id": "202610150108324F29DCC688D5BA68C387",
+  "success": true,
+  "task_id": "amk-tool-remove-image-background-1394817218562",
+  "task_type": "remove-image-background",
+  "usage": {
+    "normalized_usage": 0.00138
+  }
+}
+

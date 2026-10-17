@@ -1,0 +1,15 @@
+OK  01.png -> 1083068 bytes
+OK  02.png -> 1104316 bytes
+OK  03.png -> 1099443 bytes
+OK  04.png -> 1054645 bytes
+OK  05.png -> 994574 bytes
+OK  06.png -> 952958 bytes
+OK  07.png -> 1038291 bytes
+OK  08.png -> 841841 bytes
+OK  09.png -> 523056 bytes
+OK  10.png -> 681194 bytes
+OK  11.png -> 767581 bytes
+OK  12.png -> 721634 bytes
+OK  13.png -> 743651 bytes
+OK  14.png -> 621757 bytes
+OK  15.png -> 377430 bytes

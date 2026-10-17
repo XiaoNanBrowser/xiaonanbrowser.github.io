@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XiaoNan Browser — 輕快、簡潔、開源。你的下一個瀏覽器。</title>
+<meta name="description" content="XiaoNan Browser（小楠瀏覽器）— 支援 Windows 7 至 Windows 11 的輕量開源瀏覽器。收藏夾、無痕瀏覽、深色模式、下載管理一應俱全。Pro 版新增影片播放與標籤功能，Server 版內建開發者控制台。開發者：xiaonan。">
+<meta name="keywords" content="XiaoNan Browser,小楠瀏覽器,小楠浏览器,瀏覽器,開源瀏覽器,Windows 瀏覽器,免費瀏覽器,輕量瀏覽器,WebView2,影片播放,開發者瀏覽器">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://xiaonanbrowser.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="XiaoNan Browser">
+<meta property="og:title" content="XiaoNan Browser — 輕快、簡潔、開源。你的下一個瀏覽器。">
+<meta property="og:description" content="支援 Windows 7 至 Windows 11 的輕量開源瀏覽器。3.0.1 已發布，Pro / Server 於 11.30 登場。">
+<meta property="og:image" content="assets/icon.png">
+<meta property="og:locale" content="zh_Hant">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"XiaoNan Browser","alternateName":"小楠瀏覽器","operatingSystem":"Windows 7, 8, 10, 11","applicationCategory":"BrowserApplication","description":"輕量、開源、支援影片播放的 Windows 瀏覽器。","author":{"@type":"Person","name":"xiaonan"},"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}
+</script>
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap">
+<style>
+  :root{
+    --bg:#000000;
+    --bg-soft:#0a0a0f;
+    --card:#16161d;
+    --line:rgba(255,255,255,.08);
+    --text:#f5f5f7;
+    --text-dim:#86868b;
+    --accent:#2997ff;
+    --accent-2:#0a84ff;
+    --radius:24px;
+    --nav-h:52px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans SC","PingFang TC","Microsoft JhengHei","Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ===== 導覽列 ===== */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    height:var(--nav-h);
+    display:flex;align-items:center;
+    background:rgba(22,22,29,.72);
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    width:100%;max-width:1120px;margin:0 auto;padding:0 22px;
+    display:flex;align-items:center;gap:22px;
+  }
+  .brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}
+  .brand img{width:24px;height:24px;border-radius:6px}
+  .nav-links{display:flex;gap:22px;font-size:13px;color:var(--text-dim)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .lang-btn{
+    background:transparent;border:1px solid var(--line);color:var(--text);
+    border-radius:999px;padding:5px 13px;font-size:12px;cursor:pointer;
+    font-family:inherit;transition:border-color .2s;
+  }
+  .lang-btn:hover{border-color:var(--text-dim)}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:120px 20px 40px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(52% 40% at 50% 12%, rgba(41,151,255,.20), transparent 70%),
+      radial-gradient(36% 30% at 82% 62%, rgba(124,77,255,.12), transparent 70%),
+      radial-gradient(30% 26% at 12% 70%, rgba(0,229,255,.10), transparent 70%);
+  }
+  .hero-inner{position:relative;z-index:1;max-width:900px}
+  .eyebrow{
+    display:inline-block;font-size:13px;color:var(--accent);
+    letter-spacing:.12em;margin-bottom:22px;font-weight:500;
+  }
+  .hero h1{
+    font-size:clamp(30px,9vw,88px);
+    font-weight:700;letter-spacing:-.02em;line-height:1.04;
+    white-space:nowrap;
+  }
+  .hero .sub{
+    font-size:clamp(18px,3vw,27px);color:var(--text-dim);
+    font-weight:300;margin-top:18px;
+  }
+  .cta-row{display:flex;gap:16px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 30px;border-radius:999px;font-size:15px;font-weight:500;
+    transition:transform .18s,box-shadow .18s,background .18s;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#48a8ff;transform:translateY(-1px);box-shadow:0 10px 30px rgba(41,151,255,.35)}
+  .btn-ghost{border:1px solid var(--accent);color:var(--accent)}
+  .btn-ghost:hover{background:rgba(41,151,255,.1)}
+  .hero-note{margin-top:26px;font-size:13px;color:var(--text-dim)}
+
+  /* 瀏覽器視窗 mockup */
+  .browser-mock{
+    position:relative;z-index:1;margin:64px auto 0;width:min(920px,94vw);
+    border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--card);
+    box-shadow:0 40px 120px rgba(0,0,0,.6);
+  }
+  .mock-bar{
+    display:flex;align-items:center;gap:12px;
+    padding:10px 14px;background:#1c1c24;border-bottom:1px solid var(--line);
+  }
+  .mock-dots{display:flex;gap:7px}
+  .mock-dots i{width:11px;height:11px;border-radius:50%;background:#3a3a44}
+  .mock-dots i:first-child{background:#ff5f57}
+  .mock-dots i:nth-child(2){background:#febc2e}
+  .mock-dots i:nth-child(3){background:#28c840}
+  .mock-addr{
+    flex:1;background:#0e0e13;border:1px solid var(--line);
+    border-radius:8px;padding:6px 14px;font-size:12px;color:var(--text-dim);
+    display:flex;align-items:center;gap:8px;max-width:480px;
+  }
+  .mock-addr svg{width:12px;height:12px;flex:none}
+  .mock-url{font-size:12px;color:#bbb;font-weight:400}
+  .mock-page{position:relative;height:min(520px,60vw);min-height:300px}
+  @media (max-width:640px){
+    .mock-page{height:46vh;min-height:280px;max-height:420px}
+  }
+  .mock-page .bg{position:absolute;inset:0;background:url('assets/wallpaper_web.jpg') center/cover no-repeat}
+  .mock-page .hello{
+    position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
+    font-family:"Segoe Script","Comic Sans MS",cursive;font-size:clamp(34px,7vw,64px);
+    color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4);font-weight:600;
+  }
+  .mock-page .search{
+    position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);
+    width:min(440px,80%);display:flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.96);border-radius:999px;padding:8px 8px 8px 18px;
+    box-shadow:0 14px 40px rgba(0,0,0,.25);
+  }
+  .mock-page .search input{
+    flex:1;border:none;outline:none;background:transparent;
+    font-size:14px;color:#333;font-family:inherit;min-width:0;
+  }
+  .mock-page .search button{
+    width:44px;height:36px;border:none;border-radius:999px;background:#3b82f6;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .mock-page .search button svg{width:16px;height:16px}
+
+  /* ===== 通用 section ===== */
+  section{padding:110px 0;position:relative}
+  .sec-title{text-align:center;margin-bottom:14px}
+  .sec-title .kicker{font-size:13px;color:var(--accent);letter-spacing:.14em;font-weight:500;margin-bottom:14px}
+  .sec-title h2{font-size:clamp(30px,5.4vw,56px);font-weight:700;letter-spacing:-.02em}
+  .sec-title p{color:var(--text-dim);margin-top:14px;font-weight:300;font-size:clamp(15px,2vw,19px)}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* ===== 功能卡片 ===== */
+  .ft-grid{
+    display:grid;grid-template-columns:1fr;gap:18px;margin-top:60px;
+  }
+  .ft-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px 28px;transition:transform .25s,border-color .25s;
+  }
+  .ft-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.16)}
+  .ft-icon{
+    width:52px;height:52px;border-radius:16px;
+    background:linear-gradient(135deg,rgba(41,151,255,.18),rgba(124,77,255,.14));
+    color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+  }
+  .ft-icon svg{width:26px;height:26px}
+  .ft-card h3{font-size:21px;font-weight:600;margin-bottom:9px;letter-spacing:-.01em}
+  .ft-card p{font-size:14px;color:var(--text-dim);line-height:1.7;font-weight:300}
+
+  /* ===== 多裝置 ===== */
+  .devices{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%)}
+  .dev-grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:64px}
+  .dev-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;gap:20px;
+    transition:transform .25s,border-color .25s;
+  }
+  .dev-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.16)}
+  .dev-head{display:flex;align-items:center;gap:13px}
+  .dev-head img.dev-ic{width:44px;height:44px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,.04);padding:4px}
+  .dev-head .svg-ic{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;flex:none}
+  .dev-head .svg-ic svg{width:24px;height:24px}
+  .dev-head h3{font-size:17px;font-weight:600}
+  .dev-head .dev-sub{font-size:12px;color:var(--text-dim);font-weight:300}
+  .dev-status{
+    margin-top:auto;padding-top:16px;border-top:1px solid var(--line);
+    font-size:13px;color:var(--text-dim);display:flex;align-items:center;gap:8px;
+  }
+  .dev-status i{width:8px;height:8px;border-radius:50%;flex:none}
+  .st-warn{color:#ffb340}.st-warn i{background:#ff9f0a}
+  .st-ok{color:#30d158}.st-ok i{background:#30d158}
+  .st-dev{color:#64d2ff}.st-dev i{background:#64d2ff}
+
+  /* 瀏覽器窗口（設備內） */
+  .brow{overflow:hidden;border-radius:12px;border:1px solid var(--line);background:var(--card)}
+  .brow-bar{display:flex;align-items:center;gap:8px;padding:7px 10px;background:#1c1c24;border-bottom:1px solid var(--line)}
+  .brow-dots{display:flex;gap:5px;flex:none}
+  .brow-dots i{width:9px;height:9px;border-radius:50%;background:#3a3a44}
+  .brow-dots i:first-child{background:#ff5f57}
+  .brow-dots i:nth-child(2){background:#febc2e}
+  .brow-dots i:nth-child(3){background:#28c840}
+  .brow-addr{flex:1;background:#0e0e13;border-radius:6px;padding:4px 10px;font-size:10px;color:var(--text-dim);text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .win-btns{display:flex;gap:2px;flex:none}
+  .win-btns span{width:26px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#8a8a93;line-height:1}
+  .win-btns span:hover{background:rgba(255,255,255,.08)}
+  .brow-page{
+    position:relative;background:url('assets/wallpaper_web.jpg') center/cover no-repeat;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;overflow:hidden;
+  }
+  .brow-page .bhello{font-family:"Segoe Script","Comic Sans MS",cursive;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45);font-weight:600;user-select:none}
+  .brow-page .bsearch{
+    width:72%;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.22);border-radius:8px;
+    padding:6px 12px;color:#fff;font-size:11px;text-align:center;outline:none;
+  }
+  .brow-mac .brow-page,.brow-win .brow-page,.brow-ipad .brow-page{height:150px}
+  .brow-mac .bhello{font-size:34px}
+  .brow-win .bhello{font-size:30px}
+  .brow-ipad .bhello{font-size:36px}
+  .brow-phone{max-width:200px;margin:0 auto;width:100%}
+  .brow-phone .brow-page{height:220px}
+  .brow-phone .bhello{font-size:26px}
+  /* App 形式（行動裝置）：只有壁紙 + 搜索框 */
+  .brow-app{background:transparent;border:none}
+  .brow-app .brow-page{height:150px;border-radius:16px;border:1px solid rgba(255,255,255,.08)}
+  .brow-app.brow-phone .brow-page{height:220px}
+  .brow-app .bsearch{width:80%;font-size:12px;padding:7px 12px;border-radius:10px;background:rgba(0,0,0,.4)}
+  .brow-shot-wrap{padding:0;background:transparent;border:none}
+  .brow-shot-wrap .brow-shot{display:block;width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:#000}
+
+  /* ===== 系統需求 ===== */
+  .sys-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:60px;max-width:860px;margin-left:auto;margin-right:auto}
+  .sys-feat{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px;max-width:1080px;margin-left:auto;margin-right:auto}
+  .sys-card{
+    display:flex;align-items:center;gap:20px;
+    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 28px;
+  }
+  .sys-card .sys-ic{width:46px;height:46px;border-radius:14px;background:rgba(41,151,255,.14);color:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+  .sys-card .sys-ic svg{width:23px;height:23px}
+  .sys-card h3{font-size:17px;font-weight:600;margin-bottom:4px}
+  .sys-card p{font-size:13px;color:var(--text-dim);font-weight:300}
+  .sys-warn{border-color:rgba(255,159,10,.35);background:rgba(255,159,10,.06)}
+  .sys-warn .sys-ic{background:rgba(255,159,10,.16);color:#ff9f0a}
+  .sys-warn h3{color:#ffb340}
+
+  /* ===== 下載 ===== */
+  .download{text-align:center;background:radial-gradient(60% 70% at 50% 100%, rgba(41,151,255,.14), transparent 70%)}
+  .dl-meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:44px}
+  .dl-chip{font-size:13px;color:var(--text-dim);border:1px solid var(--line);padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.02)}
+  .dl-chip b{color:var(--text);font-weight:500}
+  .dl-big{margin-top:40px}
+  .dl-note{margin-top:22px;font-size:13px;color:var(--text-dim)}
+  .dl-note a{color:var(--accent)}
+
+  /* ===== 新品預告 ===== */
+  .teaser{
+    text-align:center;overflow:hidden;
+    background:linear-gradient(180deg,var(--bg) 0%,#05060f 100%);
+  }
+  .teaser::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(50% 60% at 50% 8%, rgba(124,77,255,.22), transparent 70%);
+  }
+  .teaser .wrap{position:relative;z-index:1}
+  .countdown{display:flex;gap:14px;justify-content:center;margin-top:52px;flex-wrap:wrap}
+  .cd-cell{
+    min-width:92px;padding:20px 10px;border-radius:20px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);
+    backdrop-filter:blur(10px);
+  }
+  .cd-cell .num{font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .cd-cell .lbl{font-size:12px;color:var(--text-dim);margin-top:6px}
+  .ts-vers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:920px;margin:38px auto 0}
+  .ts-card{display:block;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px 16px;text-align:left;text-decoration:none;color:inherit;transition:transform .25s ease,border-color .25s ease}
+  .ts-card:hover{transform:translateY(-3px);border-color:rgba(130,170,255,.4)}
+  .ts-badge{display:inline-block;font-size:11px;letter-spacing:.06em;padding:3px 10px;border-radius:999px;background:rgba(60,220,132,.14);border:1px solid rgba(60,220,132,.35);color:#5ee8a8;margin-bottom:10px}
+  .ts-badge-coming{background:rgba(255,170,60,.12);border-color:rgba(255,170,60,.35);color:#ffc06b}
+  .ts-card h4{font-size:15px;font-weight:600;margin:0 0 4px}
+  .ts-card p{font-size:12px;color:#9a9ab0;margin:0}
+  @media (max-width:700px){.ts-vers{grid-template-columns:1fr}}
+  .cd-sep{align-self:center;font-size:26px;color:var(--text-dim);font-weight:300;display:none}
+  .stay{margin-top:34px;font-size:15px;color:var(--text-dim);font-weight:300}
+  .apple-link{
+    margin:70px auto 0;max-width:640px;display:flex;align-items:center;gap:18px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:24px;
+    padding:26px 30px;transition:border-color .25s,background .25s;text-align:left;
+  }
+  .apple-link:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.07)}
+  .apple-link .al-ic{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex:none}
+  .apple-link .al-ic svg{width:24px;height:24px}
+  .apple-link h3{font-size:17px;font-weight:600}
+  .apple-link p{font-size:13px;color:var(--text-dim);margin-top:4px;font-weight:300}
+  .apple-link .arrow{margin-left:auto;font-size:20px;color:var(--text-dim)}
+
+  /* ===== iOS 開發預覽 ===== */
+  .pv-sec{overflow:hidden;background:#08090f}
+  .pv-block{margin-top:70px}
+  .pv-block-head{max-width:560px;margin-bottom:30px}
+  .pv-txt .pv-badge,.pv-block-head .pv-badge{
+    display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--accent);
+    border:1px solid rgba(124,77,255,.4);background:rgba(124,77,255,.1);
+    padding:6px 12px;border-radius:999px;margin-bottom:16px;
+  }
+  .pv-block-head h3{font-size:clamp(20px,2.6vw,28px);font-weight:700;letter-spacing:-.01em}
+  .pv-block-head p{font-size:14px;color:var(--text-dim);margin-top:10px;line-height:1.7;font-weight:300}
+  .pv-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .pv-card{
+    background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;
+    padding:16px;transition:border-color .25s,transform .25s;
+  }
+  .pv-card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-3px)}
+  .pv-card .pv-shot{display:block;width:100%;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#000}
+  .pv-card.pv-ipad-card .pv-shot{max-height:300px;object-fit:contain}
+  .pv-cap h4{font-size:15px;font-weight:600;margin-top:14px}
+  .pv-cap p{font-size:13px;color:var(--text-dim);margin-top:6px;line-height:1.7;font-weight:300}
+  @media(max-width:760px){
+    .pv-block{margin-top:44px}
+    .pv-cards{grid-template-columns:1fr;gap:16px}
+  }
+
+  /* ===== 開發人員清單 ===== */
+  .cr-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:56px}
+  .cr-col{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px 30px}
+  .cr-col h3{font-size:15px;font-weight:600;margin-bottom:20px;color:var(--text-dim);letter-spacing:.06em}
+  .cr-chips{display:flex;flex-wrap:wrap;gap:10px}
+  .cr-chips span{
+    font-size:14px;color:var(--text);background:rgba(255,255,255,.05);
+    border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-weight:500;
+  }
+  .cr-ai{margin-top:26px;font-size:13px;color:var(--text-dim);text-align:center}
+  .cr-ai b{color:var(--accent);font-weight:600}
+  @media (min-width:768px){
+    .cr-grid{grid-template-columns:repeat(2,1fr)}
+  }
+
+  /* ===== 頁腳 ===== */
+  footer{
+    border-top:1px solid var(--line);padding:44px 0;background:var(--bg);
+  }
+  .foot-inner{max-width:1120px;margin:0 auto;padding:0 22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+  .foot-brand{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
+  .foot-brand img{width:22px;height:22px;border-radius:5px}
+  .foot-right{font-size:12px;color:var(--text-dim);font-weight:300}
+  .cr-legal{
+    margin-top:40px;padding-top:26px;
+    border-top:1px solid var(--line);
+    color:var(--text-dim);font-size:12px;line-height:1.9;font-weight:300;
+    text-align:left;
+  }
+  .cr-legal p{margin-bottom:10px}
+  .cr-legal p:first-child{font-weight:500;color:var(--text)}
+
+  /* ===== Toast ===== */
+  #toast{
+    position:fixed;left:50%;bottom:36px;transform:translate(-50%,80px);
+    background:rgba(30,30,38,.94);color:var(--text);border:1px solid var(--line);
+    padding:13px 24px;border-radius:14px;font-size:14px;z-index:200;
+    opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;backdrop-filter:blur(12px);
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ===== 下載彈窗 ===== */
+  #dlModal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;z-index:120;padding:24px}
+  #dlModal.show{display:flex}
+  .dl-box{position:relative;background:#17171e;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:38px 40px 32px;max-width:380px;width:100%;text-align:center;animation:pop .22s ease}
+  @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+  .dl-box h3{font-size:20px;font-weight:600;margin-bottom:8px}
+  .dl-box p{font-size:13px;color:var(--text-dim);line-height:1.65;margin-bottom:24px}
+  .dl-grp{font-size:30px;font-weight:700;letter-spacing:2px;background:rgba(41,151,255,.1);border:1px solid rgba(41,151,255,.32);color:var(--accent);border-radius:14px;padding:14px;margin-bottom:24px}
+  .dl-acts{display:flex;gap:10px}
+  .dl-acts button{flex:1;padding:12px 0;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#fff;transition:background .2s}
+  .dl-acts button:hover{background:rgba(255,255,255,.1)}
+  .dl-acts .dl-join{background:var(--accent);border-color:var(--accent);color:#04121f;font-weight:600}
+  .dl-acts .dl-join:hover{background:#5db3ff}
+  .dl-close{position:absolute;top:12px;right:14px;color:#8a8a93;font-size:15px;cursor:pointer;background:none;border:none;padding:6px;line-height:1}
+
+  /* ===== 下載版本選擇彈窗 ===== */
+  #dlChoose{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;z-index:121;padding:24px}
+  #dlChoose.show{display:flex}
+  .dlc-box{position:relative;background:#17171e;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:34px 36px 28px;max-width:780px;width:100%;text-align:center;animation:pop .22s ease;max-height:92vh;overflow:auto}
+  .dlc-box h3{font-size:21px;font-weight:600;margin-bottom:6px}
+  .dlc-sub{font-size:13px;color:var(--text-dim);margin-bottom:22px}
+  .dlc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+  .dlc-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px 16px;display:flex;flex-direction:column}
+  .dlc-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--accent);background:rgba(41,151,255,.12);border:1px solid rgba(41,151,255,.3);border-radius:999px;padding:3px 10px;margin-bottom:12px;align-self:flex-start}
+  .dlc-card h4{font-size:17px;font-weight:600;margin-bottom:4px}
+  .dlc-meta{font-size:12px;color:var(--text-dim);margin-bottom:10px}
+  .dlc-fea{font-size:13px;color:#c9c9d1;line-height:1.75;margin-bottom:16px;flex:1}
+  .dlc-fea li{list-style:none;padding-left:16px;position:relative}
+  .dlc-fea li::before{content:'';position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .dlc-btn{margin-top:auto;padding:11px 0;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff;transition:background .2s;display:block;text-align:center;text-decoration:none}
+  .dlc-btn:hover{background:rgba(255,255,255,.13)}
+  .dlc-note{margin-top:18px;font-size:12px;color:var(--text-dim)}
+  @media(max-width:640px){.dlc-grid{grid-template-columns:1fr}.dlc-box{padding:24px 18px 20px;max-width:340px}}
+
+  /* ===== 設備預覽層 ===== */
+  .dev-pv-tag{margin-left:auto;display:inline-flex;align-items:center;gap:5px;color:var(--accent);font-size:12px;font-weight:500;white-space:nowrap}
+  .dev-pv-tag .arr{transition:transform .2s}
+  .dev-card:hover .dev-pv-tag .arr{transform:translateX(3px)}
+  .dev-pv-none{margin-left:auto;color:#5a5a64;font-size:12px;white-space:nowrap}
+  #pvModal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:150;padding:0}
+  #pvModal.show{display:flex}
+  #pvModal.show .pv-box{animation:pvIn .3s ease}
+  @keyframes pvIn{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
+  .pv-box{
+    width:100%;height:100%;max-width:620px;background:#101016;border:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .pv-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:#14141b;flex:none}
+  .pv-head h3{font-size:15px;font-weight:600;flex:1}
+  .pv-head .pv-hint{font-size:11px;color:var(--text-dim);font-weight:400}
+  .pv-close{color:#8a8a93;font-size:17px;cursor:pointer;background:none;border:none;padding:6px;line-height:1}
+  .pv-scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:20px;display:flex;flex-direction:column;gap:18px;-webkit-overflow-scrolling:touch}
+  .pv-scroll img{width:100%;height:auto;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#000;flex:none}
+  .pv-scroll .pv-wide{max-width:560px;margin:0 auto;width:100%}
+  .pv-scroll .pv-tall{max-width:300px;margin:0 auto;width:100%}
+
+  /* ===== 響應式 ===== */
+  @media (min-width:768px){
+    .ft-grid{grid-template-columns:repeat(2,1fr)}
+    .sys-grid{grid-template-columns:repeat(2,1fr)}
+    .sys-feat{grid-template-columns:repeat(3,1fr)}
+    .dev-grid{grid-template-columns:repeat(2,1fr)}
+    .nav-links{display:flex}
+  }
+  @media (min-width:1080px){
+    .ft-grid{grid-template-columns:repeat(3,1fr)}
+    .dev-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    section{padding:80px 0}
+    .cd-sep{display:none}
+    .hero{min-height:auto;padding-top:120px;padding-bottom:70px}
+    .hero h1{font-size:clamp(24px,8.4vw,44px)}
+    .browser-mock{margin-top:46px}
+    .cd-cell{min-width:70px;padding:14px 6px}
+    .cd-cell .num{font-size:34px}
+    .device-stage{flex-direction:column;align-items:center;gap:38px}
+    .dev-mac{width:min(430px,80vw)}
+    .dev-ipad{width:min(210px,54vw)}
+    .dev-iphone{width:min(120px,30vw)}
+  }
+  /* ===== 版本比較 ===== */
+  .ver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto}
+  .ver-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:24px 20px;text-align:left;transition:transform .25s ease,border-color .25s ease}
+  .ver-card:hover{transform:translateY(-3px);border-color:rgba(130,170,255,.35)}
+  .ver-badge{display:inline-block;font-size:11px;letter-spacing:.08em;padding:4px 10px;border-radius:999px;background:rgba(41,151,255,.14);border:1px solid rgba(120,170,255,.3);color:#8ab4ff;margin-bottom:12px}
+  .ver-card h3{font-size:19px;font-weight:700;margin:0 0 6px}
+  .ver-desc{font-size:13px;color:#8f8fa8;margin:0 0 14px}
+  .ver-card ul{list-style:none;padding:0;margin:0}
+  .ver-card li{font-size:13px;color:#c9c9de;padding:6px 0 6px 20px;position:relative;line-height:1.5}
+  .ver-card li::before{content:"";position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  @media (max-width:860px){.ver-grid{grid-template-columns:1fr}}
+  /* ===== Server 大板块 ===== */
+  .srv{background:linear-gradient(180deg,#0a0a0f 0%,#0d0d16 55%,#05050a 100%);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+  .srv-hero{text-align:center;max-width:780px;margin:0 auto}
+  .srv-title{font-size:clamp(40px,7vw,84px);font-weight:700;letter-spacing:-.03em;background:linear-gradient(180deg,#ffffff 0%,#c9c9e8 70%,#9a9ac0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;margin:14px 0 10px}
+  .srv-sub{color:#9a9ab0;font-size:clamp(15px,2vw,20px);max-width:580px;margin:0 auto 52px}
+  .srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin:0 auto 46px}
+  .srv-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:22px 18px;text-align:left;transition:transform .25s ease,border-color .25s ease}
+  .srv-card:hover{transform:translateY(-3px);border-color:rgba(130,170,255,.35)}
+  .srv-card h4{font-size:15px;margin:12px 0 6px;color:#fff;font-weight:600}
+  .srv-card p{font-size:13px;color:#8f8fa8;line-height:1.65}
+  .srv-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(88,140,255,.16);border:1px solid rgba(120,160,255,.25);color:#8ab4ff}
+  .srv-ico svg{width:20px;height:20px}
+  @media (max-width:900px){.srv-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:500px){.srv-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ===== 導覽列 ===== -->
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="assets/icon.png" alt="XiaoNan Browser">
+      <span data-i18n="brand">XiaoNan Browser</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" data-i18n="nav_features">功能</a>
+      <a href="#devices" data-i18n="nav_devices">多裝置</a>
+      <a href="#preview" data-i18n="nav_preview">預覽</a>
+      <a href="#teaser" data-i18n="nav_event">活動</a>
+      <a href="#download" data-i18n="nav_download">下載</a>
+      <a href="#support" data-i18n="nav_support">支援</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" id="langBtn" aria-label="切換語言">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow" data-i18n="hero_eyebrow">由 xiaonan 開發</div>
+    <h1 data-i18n="hero_title">XiaoNan Browser。</h1>
+    <p class="sub" data-i18n="hero_sub">輕快、簡潔、開源。你的下一個瀏覽器。</p>
+    <div class="cta-row">
+      <button class="btn btn-primary" id="dlBtn" data-i18n="hero_cta1">免費下載</button>
+      <a class="btn btn-ghost" href="#features" data-i18n="hero_cta2">了解更多</a>
+    </div>
+    <p class="hero-note" data-i18n="hero_note">版本 1.3.0 · 140 MB · 支援 Windows 7 – 11</p>
+  </div>
+
+  <!-- 瀏覽器視窗 mockup -->
+  <div class="browser-mock reveal" aria-hidden="true">
+    <div class="mock-bar">
+      <div class="mock-dots"><i></i><i></i><i></i></div>
+      <div class="mock-addr">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="#8a8a93" stroke-width="1.6"/><path d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 8.5 8.5 0 1 0-6.2 6.2 1.65 1.65 0 0 0 1.82-.33L17 18.1a8 8 0 0 0 3.5-1.3L19.4 15z" stroke="#8a8a93" stroke-width="1.6"/></svg>
+        <span class="mock-url">https://xiaonanbrowser.com</span>
+      </div>
+    </div>
+    <div class="mock-page">
+      <div class="bg"></div>
+      <div class="hello">hello</div>
+      <div class="search">
+        <input type="text" placeholder="輸入你想搜的" readonly>
+        <button><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2.2"/><path d="M20 20l-4.4-4.4" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 功能 ===== -->
+<section id="features" style="padding-top:60px">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="ft_kicker">功能</div>
+      <h2 data-i18n="ft_title">恰到好處。剛剛好的瀏覽。</h2>
+      <p data-i18n="ft_sub">為日常上網而生的每一項功能，都恰到好處。</p>
+    </div>
+    <div class="ft-grid">
+      <div class="ft-card reveal">
+        <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 17.2 6.6 19.8l1.1-6.1-4.5-4.3 6.1-.8L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="ft1_t">收藏。隨心所欲。</h3>
+        <p data-i18n="ft1_d">一鍵收藏網頁，重裝系統也不丟。</p>
+      </div>
+      <div class="ft-card reveal">
+        <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10.6 5.1A8.9 8.9 0 0 1 12 5c5 0 9 4 10 7a15.6 15.6 0 0 1-3.4 4.3M6.6 6.6A15.6 15.6 0 0 0 2 12c1 3 5 7 10 7 1.2 0 2.4-.2 3.4-.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="ft2_t">無痕。來去無蹤。</h3>
+        <p data-i18n="ft2_d">不留下歷史、Cookie 或快取。</p>
+      </div>
+      <div class="ft-card reveal">
+        <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.4 13.7A8.5 8.5 0 1 1 10.3 3.6a7 7 0 0 0 10.1 10.1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="ft3_t">深色。夜晚友好。</h3>
+        <p data-i18n="ft3_d">介面與支援的網站一起變暗。</p>
+      </div>
+      <div class="ft-card reveal">
+        <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="ft4_t">下載。一目瞭然。</h3>
+        <p data-i18n="ft4_d">進度、狀態、一鍵開啟檔案。</p>
+      </div>
+      <div class="ft-card reveal">
+        <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="ft5_t">記錄。隨時回首。</h3>
+        <p data-i18n="ft5_d">自動保存最近 200 條瀏覽記錄。</p>
+      </div>
+      <div class="ft-card reveal">
+        <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21a9 9 0 1 1 9-9c0 1.7-1.3 3-3 3h-2a2 2 0 0 0-1.6 3.2c.4.5.1 2.8-2.4 2.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="10" r="1.2" fill="currentColor"/><circle cx="12.5" cy="7.5" r="1.2" fill="currentColor"/><circle cx="16.5" cy="10" r="1.2" fill="currentColor"/></svg></div>
+        <h3 data-i18n="ft6_t">個性。由你定義。</h3>
+        <p data-i18n="ft6_d">換壁紙、純色背景、背景模糊。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 多裝置 ===== -->
+<section class="devices" id="devices">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="dv_kicker">多裝置</div>
+      <h2 data-i18n="dv_title">一個瀏覽器。所有裝置。</h2>
+      <p data-i18n="dv_sub">無論哪種裝置，畫面都恰到好處。</p>
+    </div>
+    <div class="dev-grid">
+      <div class="dev-card reveal" onclick="showToast(I18N[lang].pv_none)" style="cursor:pointer">
+        <div class="dev-head">
+          <img class="dev-ic" src="assets/macmini.png" alt="Mac mini">
+          <div><h3>Mac mini</h3><div class="dev-sub">macOS</div></div>
+        </div>
+        <div class="brow brow-mac">
+          <div class="brow-bar">
+            <div class="brow-dots"><i></i><i></i><i></i></div>
+            <div class="brow-addr">https://xiaonanbrowser.com</div>
+          </div>
+          <div class="brow-page"><span class="bhello">hello</span><input class="bsearch" placeholder="輸入你想搜的" readonly></div>
+        </div>
+        <div class="dev-status st-warn"><i></i><span data-i18n="dv_s_mac">macOS 版 · 暫未開發</span><span class="dev-pv-none">暫無預覽</span></div>
+      </div>
+
+      <div class="dev-card reveal" onclick="showToast(I18N[lang].pv_none)" style="cursor:pointer">
+        <div class="dev-head">
+          <span class="svg-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="13" rx="2" stroke="#8ab4ff" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="#8ab4ff" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <div><h3>Windows</h3><div class="dev-sub">PC</div></div>
+        </div>
+        <div class="brow brow-win">
+          <div class="brow-bar">
+            <div class="brow-addr">https://xiaonanbrowser.com</div>
+            <div class="win-btns"><span>&#x2014;</span><span>&#x25A1;</span><span>&#x2715;</span></div>
+          </div>
+          <div class="brow-page"><span class="bhello">hello</span><input class="bsearch" placeholder="輸入你想搜的" readonly></div>
+        </div>
+        <div class="dev-status st-ok"><i></i><span data-i18n="dv_s_win">Windows 版 · 已發佈（exe）</span><span class="dev-pv-none">暫無預覽</span></div>
+      </div>
+
+      <div class="dev-card reveal" onclick="openPv()" style="cursor:pointer">
+        <div class="dev-head">
+          <img class="dev-ic" src="assets/ipad.png" alt="iPad">
+          <div><h3>iPad</h3><div class="dev-sub">iPadOS</div></div>
+        </div>
+        <div class="brow brow-app brow-shot-wrap">
+          <img class="brow-shot" src="assets/ios/02.png" alt="iPad 版預覽">
+        </div>
+        <div class="dev-status st-dev"><i></i><span data-i18n="dv_s_ipad">iPadOS 版 · 正在開發</span><span class="dev-pv-tag" data-i18n="pv_tag">查看預覽<svg viewBox="0 0 24 24" width="11" height="11" fill="none"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </div>
+
+      <div class="dev-card reveal" onclick="openPv()" style="cursor:pointer">
+        <div class="dev-head">
+          <img class="dev-ic" src="assets/iphone.png" alt="iPhone">
+          <div><h3>iPhone</h3><div class="dev-sub">iOS</div></div>
+        </div>
+        <div class="brow brow-app brow-phone brow-shot-wrap">
+          <img class="brow-shot" src="assets/ios/08.png" alt="iPhone 版預覽">
+        </div>
+        <div class="dev-status st-dev"><i></i><span data-i18n="dv_s_iphone">iOS 版 · 正在開發</span><span class="dev-pv-tag" data-i18n="pv_tag">查看預覽<svg viewBox="0 0 24 24" width="11" height="11" fill="none"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </div>
+
+      <div class="dev-card reveal" onclick="showToast(I18N[lang].pv_none)" style="cursor:pointer">
+        <div class="dev-head">
+          <span class="svg-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 10h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7z" stroke="#3ddc84" stroke-width="1.5"/><circle cx="12" cy="6" r="3" stroke="#3ddc84" stroke-width="1.5"/><path d="M4 8l-2-3M20 8l2-3" stroke="#3ddc84" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <div><h3>Android</h3><div class="dev-sub">通用版</div></div>
+        </div>
+        <div class="brow brow-app brow-phone">
+          <div class="brow-page"><input class="bsearch" placeholder="輸入你想搜的" readonly></div>
+        </div>
+        <div class="dev-status st-warn"><i></i><span data-i18n="dv_s_android">安卓版 · 暫未開發</span><span class="dev-pv-none">暫無預覽</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 系統需求 ===== -->
+<section id="support">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="sy_kicker">支援</div>
+      <h2 data-i18n="sy_title">系統需求</h2>
+      <p data-i18n="sy_sub">裝得下，就跑得順。</p>
+    </div>
+    <div class="sys-grid">
+      <div class="sys-card reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h3 data-i18n="sy1_t">Windows 7 – 11</h3><p data-i18n="sy1_d">支援 Windows 7 / 8 / 10 / 11（x64），老電腦也跑得動。</p></div>
+      </div>
+      <div class="sys-card reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M16.5 12.9c0-2.6 2.1-3.8 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.3 2.5 1.3-.1 1.8-.8 3.4-.8s2 .8 3.4.8c1.4 0 2.3-1.2 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.8-4zM14.2 5.6c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2.1-1.1 3.3 1.1.1 2.3-.6 3-1.6z"/></svg></div>
+        <div><h3 data-i18n="sy_mac_t">macOS</h3><p data-i18n="sy_mac_d">支援 macOS Tahoe 及更新版本，原生體驗。</p></div>
+      </div>
+      <div class="sys-card reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h3 data-i18n="sy_ios_t">iOS 16 – 26</h3><p data-i18n="sy_ios_d">適用於 iPhone 與 iPad，iOS 16 及以上。</p></div>
+      </div>
+      <div class="sys-card reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 10h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7z" stroke="#3ddc84" stroke-width="1.5"/><circle cx="12" cy="6" r="3" stroke="#3ddc84" stroke-width="1.5"/><path d="M4 8l-2-3M20 8l2-3" stroke="#3ddc84" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h3 data-i18n="sy_and_t">Android 14 及以上</h3><p data-i18n="sy_and_d">支援 Android 14 及更新版本。</p></div>
+      </div>
+    </div>
+    <div class="sys-feat">
+      <div class="sys-card reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div><h3 data-i18n="sy2_t">內置 WebView2 內核</h3><p data-i18n="sy2_d">基於 Edge 同款 Chromium 內核，真正開啟任何網站。</p></div>
+      </div>
+      <div class="sys-card reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 1 0 9 9c0-1-.2-2-.5-2.9-.3-.9-1.2-1.1-2-1.1H16a2 2 0 0 1-2-2V5.5a2 2 0 0 0-.6-1.4C13 3.7 12.5 3.4 12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="12" r="1" fill="currentColor"/><circle cx="11" cy="7.5" r="1" fill="currentColor"/><circle cx="16.5" cy="14" r="1" fill="currentColor"/></svg></div>
+        <div><h3 data-i18n="sy3_t">完整開源</h3><p data-i18n="sy3_d">程式碼完全開放，想怎麼改都行。</p></div>
+      </div>
+      <div class="sys-card sys-warn reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3L2 20h20L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 10v4M12 17.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><h3 data-i18n="sy4_t">僅 3.0 不支援影片播放</h3><p data-i18n="sy4_d">3.0 不帶影片播放；Pro / Server 版完整支援影片播放（B站 / 抖音 / 快手）。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 版本比較 ===== -->
+<section class="ver" id="versions">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="ver_kicker">版本比較</div>
+      <h2 data-i18n="ver_title">三個版本，各有擅場。</h2>
+      <p data-i18n="ver_sub">選一款最適合你的小楠瀏覽器。</p>
+    </div>
+    <div class="ver-grid">
+      <div class="ver-card reveal">
+        <span class="ver-badge" data-i18n="ver_b_std">普通版</span>
+        <h3 data-i18n="ver_n_std">XiaoNan Browser 3.0</h3>
+        <p class="ver-desc" data-i18n="ver_d_std">輕量快速，日常瀏覽首選。</p>
+        <ul>
+          <li data-i18n="ver_f1_std">不支援影片播放</li>
+          <li data-i18n="ver_f2_std">全新 WebView2 內核，安裝包僅 35 MB</li>
+          <li data-i18n="ver_f3_std">資料可一鍵遷移到 Pro / Server</li>
+        </ul>
+      </div>
+      <div class="ver-card reveal">
+        <span class="ver-badge" data-i18n="ver_b_pro">Pro 版</span>
+        <h3 data-i18n="ver_n_pro">XiaoNan Browser Pro</h3>
+        <p class="ver-desc" data-i18n="ver_d_pro">更多的新功能。</p>
+        <ul>
+          <li data-i18n="ver_f1_pro">完整影片播放（B站 / 抖音 / 快手）</li>
+          <li data-i18n="ver_f2_pro">標籤功能（Ctrl+Alt+T）</li>
+          <li data-i18n="ver_f3_pro">一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）</li>
+        </ul>
+      </div>
+      <div class="ver-card reveal">
+        <span class="ver-badge" data-i18n="ver_b_srv">Server 開發者版</span>
+        <h3 data-i18n="ver_n_srv">XiaoNan Browser Server</h3>
+        <p class="ver-desc" data-i18n="ver_d_srv">更自由的開發版。</p>
+        <ul>
+          <li data-i18n="ver_f1_srv">開發者控制台（F12）</li>
+          <li data-i18n="ver_f2_srv">完整影片播放 + 觸屏優化</li>
+          <li data-i18n="ver_f3_srv">預設深色模式，為開發者而生</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 下載 ===== -->
+<section class="download" id="download">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="dl_kicker">下載</div>
+      <h2 data-i18n="dl_title">下載 XiaoNan Browser</h2>
+      <p data-i18n="dl_sub">免費、輕量、開源。現在就開始。</p>
+    </div>
+    <div class="dl-meta reveal">
+      <span class="dl-chip"><b data-i18n="dl_v">版本 1.3.0</b></span>
+      <span class="dl-chip"><b data-i18n="dl_s">140 MB</b> · Windows 安裝程式</span>
+      <span class="dl-chip" data-i18n="dl_sign">發布者：Xiao Nan Account（數位簽章）</span>
+      <span class="dl-chip" data-i18n="dl_dev">開發者：xiaonan</span>
+    </div>
+    <div class="dl-big reveal">
+      <button class="btn btn-primary" id="dlBigBtn" style="font-size:17px;padding:16px 42px">立即下載</button>
+    </div>
+    <p class="dl-note reveal" data-i18n="dl_note">安裝後如遇 SmartScreen 提示，點「更多資訊」→「仍要執行」。</p>
+  </div>
+</section>
+
+<!-- ===== Server 大板块：hello 開發者 ===== -->
+<section class="srv" id="server">
+  <div class="wrap">
+    <div class="srv-hero reveal">
+      <div class="kicker" data-i18n="srv_kicker">XiaoNan Browser Server</div>
+      <h2 class="srv-title" data-i18n="srv_title">hello 開發者。</h2>
+      <p class="srv-sub" data-i18n="srv_sub">為開發者而生的版本。控制台、調試，都為你準備好了。</p>
+    </div>
+    <div class="srv-grid reveal">
+      <div class="srv-card">
+        <div class="srv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h4 data-i18n="srv_f1_t">開發者控制台</h4>
+        <p data-i18n="srv_f1_d">F12 一鍵開啟，完整調試工具，樣式與網路一目瞭然。</p>
+      </div>
+      <div class="srv-card">
+        <div class="srv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h4 data-i18n="srv_f2_t">觸屏優化</h4>
+        <p data-i18n="srv_f2_d">收藏旁的一鍵按鈕，沒有 F12 鍵也能開啟開發者模式。</p>
+      </div>
+      <div class="srv-card">
+        <div class="srv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></div>
+        <h4 data-i18n="srv_f3_t">預設深色模式</h4>
+        <p data-i18n="srv_f3_d">為開發者而生的深色介面，晚上寫碼也舒服。</p>
+      </div>
+    </div>
+    <div class="dl-big reveal">
+      <a class="btn btn-primary" href="https://wwbfs.lanzouv.com/iPPcP4c66t2f" style="font-size:17px;padding:16px 42px;text-decoration:none"><span data-i18n="srv_cta">下載 Server 開發者版</span></a>
+      <p class="dl-note reveal" data-i18n="srv_pwd" style="margin-top:12px">下載密碼：123456</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 新品預告 · 發布公告 ===== -->
+<section class="teaser" id="teaser">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="ts_kicker">即將發布</div>
+      <h2 data-i18n="ts_title">11.30。Pro 與 Server 登場。</h2>
+      <p data-i18n="ts_sub">XiaoNan Browser Pro 與 Server 開發者版，將於 11 月 30 日正式發布。</p>
+    </div>
+    <div class="countdown reveal" id="countdown">
+      <div class="cd-cell"><div class="num" id="cd-d">00</div><div class="lbl" data-i18n="cd_d">天</div></div>
+      <div class="cd-cell"><div class="num" id="cd-h">00</div><div class="lbl" data-i18n="cd_h">小時</div></div>
+      <div class="cd-cell"><div class="num" id="cd-m">00</div><div class="lbl" data-i18n="cd_m">分鐘</div></div>
+      <div class="cd-cell"><div class="num" id="cd-s">00</div><div class="lbl" data-i18n="cd_s">秒</div></div>
+    </div>
+    <p class="stay reveal" data-i18n="ts_stay">發布倒數</p>
+
+    <div class="ts-vers reveal">
+      <a class="ts-card" href="https://wwbfs.lanzouv.com/iPPcP4c66t2f">
+        <span class="ts-badge ts-badge-coming" data-i18n="ts3_b_srv">11.30 發布</span>
+        <h4 data-i18n="ts3_n_srv">XiaoNan Browser Server</h4>
+        <p data-i18n="ts3_d_srv">更自由的開發版</p>
+      </a>
+      <a class="ts-card" href="https://wwbfs.lanzouv.com/iGNQb4c66qpa">
+        <span class="ts-badge ts-badge-coming" data-i18n="ts3_b_pro">11.30 發布</span>
+        <h4 data-i18n="ts3_n_pro">XiaoNan Browser Pro</h4>
+        <p data-i18n="ts3_d_pro">更多的新功能</p>
+      </a>
+      <a class="ts-card" href="https://wwbfs.lanzouv.com/i4Nb74c7ochc">
+        <span class="ts-badge" data-i18n="ts3_b_std">已發布</span>
+        <h4 data-i18n="ts3_n_std">XiaoNan Browser 3.0.1</h4>
+        <p data-i18n="ts3_d_std">輕量快速 · 立即下載</p>
+      </a>
+    </div>
+
+    <a class="apple-link reveal" href="https://www.apple.com.cn/apple-events/" target="_blank" rel="noopener">
+      <div class="al-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg></div>
+      <div>
+        <h3 data-i18n="ts_apple_t">探索更多 · Apple 特別活動</h3>
+        <p data-i18n="ts_apple_d">前往 Apple 官方特別活動頁面。</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===== iOS 開發預覽 ===== -->
+<section class="pv-sec" id="preview">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="pv_kicker">開發預覽</div>
+      <h2 data-i18n="pv_t2">iOS 版 · 開發中預覽</h2>
+      <p data-i18n="pv_sub">小楠瀏覽器，正在登陸 iPhone 與 iPad。</p>
+    </div>
+
+    <div class="pv-block reveal">
+      <div class="pv-block-head">
+        <span class="pv-badge">iPhone · iOS</span>
+        <h3 data-i18n="pv_ph_t">iPhone。掌心的小楠。</h3>
+        <p data-i18n="pv_ph_d">手機上的小楠瀏覽器，保留熟悉的搜尋與壁紙體驗，單手即可操作。</p>
+      </div>
+      <div class="pv-cards">
+        <div class="pv-card">
+          <img class="pv-shot" src="assets/ios/08.png" alt="iPhone 主畫面">
+          <div class="pv-cap"><h4 data-i18n="pv_ph1_t">主畫面</h4><p data-i18n="pv_ph1_d">小楠瀏覽器已登上你的主螢幕，一觸即開。</p></div>
+        </div>
+        <div class="pv-card">
+          <img class="pv-shot" src="assets/ios/09.png" alt="iPhone 搜尋">
+          <div class="pv-cap"><h4 data-i18n="pv_ph2_t">搜尋即答</h4><p data-i18n="pv_ph2_d">搜尋、翻譯、百科，一鍵直達你要的答案。</p></div>
+        </div>
+        <div class="pv-card">
+          <img class="pv-shot" src="assets/ios/12.png" alt="iPhone 瀏覽記錄">
+          <div class="pv-cap"><h4 data-i18n="pv_ph3_t">瀏覽記錄</h4><p data-i18n="pv_ph3_d">最近看過的網頁，隨時找回。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-block reveal">
+      <div class="pv-block-head">
+        <span class="pv-badge">iPad · iPadOS</span>
+        <h3 data-i18n="pv_ip_t">iPad。更大的視野。</h3>
+        <p data-i18n="pv_ip_d">平板上的小楠瀏覽器善用每一寸螢幕，多標籤並排、閱讀與多工更從容。</p>
+      </div>
+      <div class="pv-cards">
+        <div class="pv-card pv-ipad-card">
+          <img class="pv-shot" src="assets/ios/01.png" alt="iPad 標籤頁">
+          <div class="pv-cap"><h4 data-i18n="pv_ip1_t">標籤頁管理</h4><p data-i18n="pv_ip1_d">多個分頁一目瞭然，切換更順手。</p></div>
+        </div>
+        <div class="pv-card pv-ipad-card">
+          <img class="pv-shot" src="assets/ios/02.png" alt="iPad 首頁">
+          <div class="pv-cap"><h4 data-i18n="pv_ip2_t">專屬首頁</h4><p data-i18n="pv_ip2_d">hello 與最近瀏覽，打開就是熟悉的小楠。</p></div>
+        </div>
+        <div class="pv-card pv-ipad-card">
+          <img class="pv-shot" src="assets/ios/03.png" alt="iPad 瀏覽記錄">
+          <div class="pv-cap"><h4 data-i18n="pv_ip3_t">瀏覽記錄</h4><p data-i18n="pv_ip3_d">平板上也能快速找回歷史瀏覽。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 開發人員清單 ===== -->
+<section id="credits" style="padding:90px 0 10px">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <div class="kicker" data-i18n="cr_kicker">致謝</div>
+      <h2 data-i18n="cr_title">開發人員清單</h2>
+    </div>
+    <div class="cr-grid">
+      <div class="cr-col reveal">
+        <h3 data-i18n="cr_dev_t">開發支持</h3>
+        <div class="cr-chips">
+          <span>@炎玄</span><span>@狮子叔叔Uncle Lion</span><span>@WovoeH</span><span>@QQai</span><span>@雨洛很可爱</span><span>@柒(◔_◔)🐾</span><span>@MENG</span><span>@张龙</span><span>@Herxie(depressed）</span><span>@楠屿</span>
+        </div>
+      </div>
+      <div class="cr-col reveal">
+        <h3 data-i18n="cr_bug_t">漏洞 / Bug / 意見 指・提出</h3>
+        <div class="cr-chips">
+          <span>@炎玄</span><span>@狮子叔叔Uncle Lion</span><span>@引羽为鉴</span><span>@伊小龙</span><span>@中铁清玄</span><span>@雨洛很可爱</span><span>@柒(◔_◔)🐾</span><span>@张龙</span><span>@Herxie(depressed）</span><span>@楠屿</span>
+        </div>
+      </div>
+    </div>
+    <p class="cr-ai reveal" data-i18n="cr_ai"><b>AI 開發協力：豆包（Doubao）</b></p>
+    <div class="cr-legal">
+      <p>版權所有 © 2026 小楠瀏覽器（XiaoNan Browser）</p>
+      <p>本軟體（小楠瀏覽器，英文名稱：XiaoNan Browser）及相關文檔、源代碼、界面設計、圖標、文字等內容，均受中華人民共和國著作權法及相關國際版權條約保護。未經版權所有者書面許可，任何單位或個人不得複製、修改、分發、出售、出租、反向工程或以其他方式使用本軟體的任何部分。</p>
+      <p>本軟體已使用 Xiao Nan Account 提供的數字簽名服務進行簽名，以驗證軟體的完整性和來源。數字簽名僅用於確認軟體發布者的身份及軟體未被篡改，不代表對軟體功能、安全性或適用性的額外保證。</p>
+      <p>本軟體按「現狀」提供，版權所有者不對因使用或無法使用本軟體而產生的任何直接或間接損失承擔責任。使用本軟體即表示您已閱讀並同意本版權信息及相關許可條款。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 頁腳 ===== -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <img src="assets/icon.png" alt="">
+      <span>XiaoNan Browser</span>
+    </div>
+    <div class="foot-right">
+      <span data-i18n="ftr_made">由 xiaonan 製作</span> · Xiao Nan Account · © 2026
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+<div id="dlModal">
+  <div class="dl-box">
+    <button class="dl-close" onclick="closeDlModal()" aria-label="close">&#x2715;</button>
+    <h3 data-i18n="dl_qr_t">獲取安裝包</h3>
+    <p data-i18n="dl_qr_d">安裝包通過 QQ 群提供，加入群組即可下載。</p>
+    <div class="dl-grp">1064568519</div>
+    <div class="dl-acts">
+      <button onclick="copyGroup()" data-i18n="dl_qr_copy">複製群號</button>
+      <button class="dl-join" onclick="joinGroup()" data-i18n="dl_qr_join">前往加群</button>
+    </div>
+  </div>
+</div>
+<div id="dlChoose">
+  <div class="dlc-box">
+    <h3 data-i18n="dlc_title">选择你的版本</h3>
+    <p class="dlc-sub" data-i18n="dlc_sub">三款版本，任你選擇。</p>
+    <div class="dlc-grid">
+      <div class="dlc-card">
+        <span class="dlc-badge" data-i18n="dlc_b_std">普通版</span>
+        <h4 data-i18n="dlc_n_std">XiaoNan Browser 3.0</h4>
+        <div class="dlc-meta" data-i18n="dlc_m_std">35 MB · 版本 3.0</div>
+        <ul class="dlc-fea">
+          <li data-i18n="dlc_f1_std">不帶影片播放，輕量快速</li>
+          <li data-i18n="dlc_f2_std">影片站顯示「不支援瀏覽器播放影片」</li>
+        </ul>
+        <a class="dlc-btn" href="https://wwbfs.lanzouv.com/i4Nb74c7ochc"><span data-i18n="dlc_btn">下載</span></a>
+      </div>
+      <div class="dlc-card">
+        <span class="dlc-badge" data-i18n="dlc_b_pro">Pro 版</span>
+        <h4 data-i18n="dlc_n_pro">XiaoNan Browser Pro</h4>
+        <div class="dlc-meta" data-i18n="dlc_m_pro">35 MB · 版本 2.0</div>
+        <ul class="dlc-fea">
+          <li data-i18n="dlc_f1_pro">影片播放（B站 / 抖音 / 快手）</li>
+          <li data-i18n="dlc_f2_pro">標籤功能（Ctrl+Alt+T）</li>
+          <li data-i18n="dlc_f3_pro">一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）</li>
+        </ul>
+        <a class="dlc-btn" href="https://wwbfs.lanzouv.com/iGNQb4c66qpa"><span data-i18n="dlc_btn">下載</span></a>
+      </div>
+      <div class="dlc-card">
+        <span class="dlc-badge" data-i18n="dlc_b_srv">Server 開發者版</span>
+        <h4 data-i18n="dlc_n_srv">XiaoNan Browser Server</h4>
+        <div class="dlc-meta" data-i18n="dlc_m_srv">35 MB · 版本 2.0</div>
+        <ul class="dlc-fea">
+          <li data-i18n="dlc_f1_srv">開發者控制台（F12）</li>
+          <li data-i18n="dlc_f2_srv">預設深色模式，為開發者而生</li>
+          <li data-i18n="dlc_f3_srv">觸屏優化：收藏旁一鍵開啟開發者模式</li>
+        </ul>
+        <a class="dlc-btn" href="https://wwbfs.lanzouv.com/iPPcP4c66t2f"><span data-i18n="dlc_btn">下載</span></a>
+      </div>
+    </div>
+    <p class="dlc-note" data-i18n="dlc_note">下載連結即將開放，敬請期待。</p>
+  </div>
+</div>
+<div id="pvModal">
+  <div class="pv-box">
+    <div class="pv-head">
+      <h3 data-i18n="pv_title">iOS 版 · 開發中預覽</h3>
+      <span class="pv-hint" data-i18n="pv_hint">上下滑動瀏覽</span>
+      <button class="pv-close" onclick="closePv()" aria-label="close">&#x2715;</button>
+    </div>
+    <div class="pv-scroll">
+      <img class="pv-wide" src="assets/ios/01.png" alt="iOS 預覽 1">
+      <img class="pv-wide" src="assets/ios/02.png" alt="iOS 預覽 2">
+      <img class="pv-wide" src="assets/ios/03.png" alt="iOS 預覽 3">
+      <img class="pv-wide" src="assets/ios/04.png" alt="iOS 預覽 4">
+      <img class="pv-wide" src="assets/ios/05.png" alt="iOS 預覽 5">
+      <img class="pv-wide" src="assets/ios/06.png" alt="iOS 預覽 6">
+      <img class="pv-wide" src="assets/ios/07.png" alt="iOS 預覽 7">
+      <img class="pv-tall" src="assets/ios/08.png" alt="iOS 預覽 8">
+      <img class="pv-tall" src="assets/ios/09.png" alt="iOS 預覽 9">
+      <img class="pv-tall" src="assets/ios/10.png" alt="iOS 預覽 10">
+      <img class="pv-tall" src="assets/ios/11.png" alt="iOS 預覽 11">
+      <img class="pv-tall" src="assets/ios/12.png" alt="iOS 預覽 12">
+      <img class="pv-tall" src="assets/ios/13.png" alt="iOS 預覽 13">
+      <img class="pv-tall" src="assets/ios/14.png" alt="iOS 預覽 14">
+      <img class="pv-tall" src="assets/ios/15.png" alt="iOS 預覽 15">
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ===== 雙語文案 =====
+  var I18N = {
+    zh: {
+      brand:"XiaoNan Browser",
+      nav_features:"功能", nav_devices:"多裝置", nav_preview:"預覽", nav_event:"活動", nav_download:"下載", nav_support:"支援",
+      hero_eyebrow:"由 xiaonan 開發",
+      hero_title:"XiaoNan Browser。",
+      hero_sub:"輕快、簡潔、開源。你的下一個瀏覽器。",
+      hero_cta1:"免費下載", hero_cta2:"了解更多",
+      hero_note:"版本 1.3.0 · 140 MB · 支援 Windows 7 – 11",
+      ft_kicker:"功能", ft_title:"恰到好處。剛剛好的瀏覽。", ft_sub:"為日常上網而生的每一項功能，都恰到好處。",
+      ft1_t:"收藏。隨心所欲。", ft1_d:"一鍵收藏網頁，重裝系統也不丟。",
+      ft2_t:"無痕。來去無蹤。", ft2_d:"不留下歷史、Cookie 或快取。",
+      ft3_t:"深色。夜晚友好。", ft3_d:"介面與支援的網站一起變暗。",
+      ft4_t:"下載。一目瞭然。", ft4_d:"進度、狀態、一鍵開啟檔案。",
+      ft5_t:"記錄。隨時回首。", ft5_d:"自動保存最近 200 條瀏覽記錄。",
+      ft6_t:"個性。由你定義。", ft6_d:"換壁紙、純色背景、背景模糊。",
+      dv_kicker:"多裝置", dv_title:"一個瀏覽器。所有裝置。", dv_sub:"無論哪種裝置，畫面都恰到好處。",
+      dv_chip:"支援 Windows 7 / 8 / 10 / 11",
+      dv_s_mac:"macOS 版 · 暫未開發",
+      dv_s_win:"Windows 版 · 已發佈（exe）",
+      dv_s_ipad:"iPadOS 版 · 正在開發",
+      dv_s_iphone:"iOS 版 · 正在開發",
+      dv_s_android:"安卓版 · 暫未開發",
+      sy_kicker:"支援", sy_title:"系統需求", sy_sub:"裝得下，就跑得順。",
+      sy1_t:"Windows 7 – 11", sy1_d:"支援 Windows 7 / 8 / 10 / 11（x64），老電腦也跑得動。",
+      sy_mac_t:"macOS", sy_mac_d:"支援 macOS Tahoe 及更新版本，原生體驗。",
+      sy_ios_t:"iOS 16 – 26", sy_ios_d:"適用於 iPhone 與 iPad，iOS 16 及以上。",
+      sy_and_t:"Android 14 及以上", sy_and_d:"支援 Android 14 及更新版本。",
+      sy2_t:"內置 WebView2 內核", sy2_d:"基於 Edge 同款 Chromium 內核，真正開啟任何網站。",
+      sy3_t:"完整開源", sy3_d:"程式碼完全開放，想怎麼改都行。",
+      sy4_t:"僅 3.0 不支援影片播放", sy4_d:"3.0 不帶影片播放；Pro / Server 版完整支援影片播放（B站 / 抖音 / 快手）。",
+      dl_kicker:"下載", dl_title:"下載 XiaoNan Browser", dl_sub:"免費、輕量、開源。現在就開始。",
+      ver_kicker:"版本比較", ver_title:"三個版本，各有擅場。", ver_sub:"選一款最適合你的小楠瀏覽器。",
+      ver_b_std:"普通版", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"輕量快速，日常瀏覽首選。",
+      ver_f1_std:"不支援影片播放", ver_f2_std:"全新 WebView2 內核，安裝包僅 35 MB", ver_f3_std:"資料可一鍵遷移到 Pro / Server",
+      ver_b_pro:"Pro 版", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"更多的新功能。",
+      ver_f1_pro:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_pro:"標籤功能（Ctrl+Alt+T）", ver_f3_pro:"一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）",
+      ver_b_srv:"Server 開發者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的開發版。",
+      ver_f1_srv:"開發者控制台（F12）", ver_f2_srv:"完整影片播放 + 觸屏優化", ver_f3_srv:"預設深色模式，為開發者而生",
+      dl_v:"版本 1.3.0", dl_s:"140 MB",
+      dl_sign:"發布者：Xiao Nan Account（數位簽章）", dl_dev:"開發者：xiaonan",
+      dl_btn:"立即下載",
+      dlc_title:"選擇你的版本", dlc_sub:"三款版本，任你選擇。",
+      dlc_b_std:"普通版", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · 版本 3.0",
+      dlc_f1_std:"不帶影片播放，輕量快速", dlc_f2_std:"影片站顯示「不支援瀏覽器播放影片」，可在設定開啟",
+      dlc_b_pro:"Pro 版", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · 版本 2.0",
+      dlc_f1_pro:"影片播放（B站 / 抖音 / 快手）", dlc_f2_pro:"標籤功能（Ctrl+Alt+T）", dlc_f3_pro:"一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）",
+      dlc_b_srv:"Server 開發者版", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · 版本 2.0",
+      dlc_f1_srv:"開發者控制台（F12）", dlc_f2_srv:"預設深色模式，為開發者而生", dlc_f3_srv:"觸屏優化：收藏旁一鍵開啟開發者模式",
+      dlc_btn:"下載", dlc_note:"下載密碼：123456（三個版本通用）。點擊「下載」前往藍奏雲，輸入密碼即可下載。",
+      dl_note:"安裝後如遇 SmartScreen 提示，點「更多資訊」→「仍要執行」。",
+      srv_kicker:"XiaoNan Browser Server", srv_title:"hello 開發者。", srv_sub:"為開發者而生的版本。控制台、調試，都為你準備好了。",
+      srv_f1_t:"開發者控制台", srv_f1_d:"F12 一鍵開啟，完整調試工具，樣式與網路一目瞭然。",
+      srv_f2_t:"觸屏優化", srv_f2_d:"收藏旁的一鍵按鈕，沒有 F12 鍵也能開啟開發者模式。",
+      srv_f3_t:"預設深色模式", srv_f3_d:"為開發者而生的深色介面，晚上寫碼也舒服。",
+      srv_cta:"下載 Server 開發者版", srv_pwd:"下載密碼：123456",
+      ts_kicker:"即將發布", ts_title:"11.30。Pro 與 Server 登場。", ts_sub:"XiaoNan Browser Pro 與 Server 開發者版，將於 11 月 30 日正式發布。",
+      cd_d:"天", cd_h:"小時", cd_m:"分鐘", cd_s:"秒",
+      ts_stay:"發布倒數",
+      ts3_b_std:"已發布", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"輕量快速 · 立即下載",
+      ts3_b_pro:"11.30 發布", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"更多的新功能",
+      ts3_b_srv:"11.30 發布", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"更自由的開發版",
+      ts_apple_t:"探索更多 · Apple 特別活動", ts_apple_d:"前往 Apple 官方特別活動頁面。",
+      ftr_made:"由 xiaonan 製作",
+      cr_kicker:"致謝", cr_title:"開發人員清單",
+      cr_dev_t:"開發支持", cr_bug_t:"漏洞 / Bug / 意見 指・提出",
+      cr_ai:"AI 開發協力：豆包（Doubao）",
+      toast_dl:"安裝包準備中，敬請期待",
+      dl_qr_t:"獲取安裝包", dl_qr_d:"安裝包通過 QQ 群提供，加入群組即可下載。",
+      dl_qr_copy:"複製群號", dl_qr_join:"前往加群", dl_qr_copied:"已複製群號 1064568519",
+      pv_title:"iOS 版 · 開發中預覽", pv_hint:"上下滑動瀏覽", pv_tag:"查看預覽", pv_none:"預覽圖準備中，敬請期待",
+      pv_kicker:"開發預覽", pv_t2:"iOS 版 · 開發中預覽", pv_sub:"小楠瀏覽器，正在登陸 iPhone 與 iPad。",
+      pv_ph_t:"iPhone。掌心的小楠。", pv_ph_d:"手機上的小楠瀏覽器，保留熟悉的搜尋與壁紙體驗，單手即可操作。",
+      pv_ph1_t:"主畫面", pv_ph1_d:"小楠瀏覽器已登上你的主螢幕，一觸即開。",
+      pv_ph2_t:"搜尋即答", pv_ph2_d:"搜尋、翻譯、百科，一鍵直達你要的答案。",
+      pv_ph3_t:"瀏覽記錄", pv_ph3_d:"最近看過的網頁，隨時找回。",
+      pv_ip_t:"iPad。更大的視野。", pv_ip_d:"平板上的小楠瀏覽器善用每一寸螢幕，多標籤並排、閱讀與多工更從容。",
+      pv_ip1_t:"標籤頁管理", pv_ip1_d:"多個分頁一目瞭然，切換更順手。",
+      pv_ip2_t:"專屬首頁", pv_ip2_d:"hello 與最近瀏覽，打開就是熟悉的小楠。",
+      pv_ip3_t:"瀏覽記錄", pv_ip3_d:"平板上也能快速找回歷史瀏覽。"
+    },
+    sc: {
+      brand:"XiaoNan Browser",
+      nav_features:"功能", nav_devices:"多装置", nav_preview:"预览", nav_event:"活动", nav_download:"下载", nav_support:"支援",
+      hero_eyebrow:"由 xiaonan 开发",
+      hero_title:"XiaoNan Browser。",
+      hero_sub:"轻快、简洁、开源。你的下一个浏览器。",
+      hero_cta1:"免费下载", hero_cta2:"了解更多",
+      hero_note:"版本 1.3.0 · 140 MB · 支援 Windows 7 – 11",
+      ft_kicker:"功能", ft_title:"恰到好处。刚刚好的浏览。", ft_sub:"为日常上网而生的每一项功能，都恰到好处。",
+      ft1_t:"收藏。随心所欲。", ft1_d:"一键收藏网页，重装系统也不丢。",
+      ft2_t:"无痕。来去无踪。", ft2_d:"不留下历史、Cookie 或快取。",
+      ft3_t:"深色。夜晚友好。", ft3_d:"介面与支援的网站一起变暗。",
+      ft4_t:"下载。一目了然。", ft4_d:"进度、状态、一键开启档案。",
+      ft5_t:"记录。随时回首。", ft5_d:"自动保存最近 200 条浏览记录。",
+      ft6_t:"个性。由你定义。", ft6_d:"换壁纸、纯色背景、背景模糊。",
+      dv_kicker:"多装置", dv_title:"一个浏览器。所有装置。", dv_sub:"无论哪种装置，画面都恰到好处。",
+      dv_chip:"支援 Windows 7 / 8 / 10 / 11",
+      dv_s_mac:"macOS 版 · 暂未开发",
+      dv_s_win:"Windows 版 · 已发布（exe）",
+      dv_s_ipad:"iPadOS 版 · 正在开发",
+      dv_s_iphone:"iOS 版 · 正在开发",
+      dv_s_android:"安卓版 · 暂未开发",
+      sy_kicker:"支援", sy_title:"系统需求", sy_sub:"装得下，就跑得顺。",
+      sy1_t:"Windows 7 – 11", sy1_d:"支援 Windows 7 / 8 / 10 / 11（x64），老电脑也跑得动。",
+      sy_mac_t:"macOS", sy_mac_d:"支援 macOS Tahoe 及更新版本，原生体验。",
+      sy_ios_t:"iOS 16 – 26", sy_ios_d:"适用于 iPhone 与 iPad，iOS 16 及以上。",
+      sy_and_t:"Android 14 及以上", sy_and_d:"支援 Android 14 及更新版本。",
+      sy2_t:"内置 WebView2 内核", sy2_d:"基于 Edge 同款 Chromium 内核，真正开启任何网站。",
+      sy3_t:"完整开源", sy3_d:"程式码完全开放，想怎么改都行。",
+      sy4_t:"仅 3.0 不支援影片播放", sy4_d:"3.0 不带影片播放；Pro / Server 版完整支援影片播放（B站 / 抖音 / 快手）。",
+      dl_kicker:"下载", dl_title:"下载 XiaoNan Browser", dl_sub:"免费、轻量、开源。现在就开始。",
+      ver_kicker:"版本比较", ver_title:"三个版本，各有擅场。", ver_sub:"选一款最适合你的小楠浏览器。",
+      ver_b_std:"普通版", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"轻量快速，日常浏览首选。",
+      ver_f1_std:"不支援影片播放", ver_f2_std:"全新 WebView2 内核，安装包仅 35 MB", ver_f3_std:"资料可一键迁移到 Pro / Server",
+      ver_b_pro:"Pro 版", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"更多的新功能。",
+      ver_f1_pro:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_pro:"标签功能（Ctrl+Alt+T）", ver_f3_pro:"一键迁移 3.0 资料（浏览记录 / 收藏夹）",
+      ver_b_srv:"Server 开发者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的开发版。",
+      ver_f1_srv:"开发者控制台（F12）", ver_f2_srv:"完整影片播放 + 触屏优化", ver_f3_srv:"预设深色模式，为开发者而生",
+      dl_v:"版本 1.3.0", dl_s:"140 MB",
+      dl_sign:"发布者：Xiao Nan Account（数位签章）", dl_dev:"开发者：xiaonan",
+      dl_btn:"立即下载",
+      dlc_title:"选择你的版本", dlc_sub:"三款版本，任你选择。",
+      dlc_b_std:"普通版", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · 版本 3.0",
+      dlc_f1_std:"不带影片播放，轻量快速", dlc_f2_std:"影片站显示「不支援浏览器播放影片」，可在设定开启",
+      dlc_b_pro:"Pro 版", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · 版本 2.0",
+      dlc_f1_pro:"影片播放（B站 / 抖音 / 快手）", dlc_f2_pro:"标签功能（Ctrl+Alt+T）", dlc_f3_pro:"一键迁移 3.0 资料（浏览记录 / 收藏夹）",
+      dlc_b_srv:"Server 开发者版", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · 版本 2.0",
+      dlc_f1_srv:"开发者控制台（F12）", dlc_f2_srv:"预设深色模式，为开发者而生", dlc_f3_srv:"触屏优化：收藏旁一键开启开发者模式",
+      dlc_btn:"下载", dlc_note:"下载密码：123456（三个版本通用）。点击「下载」前往蓝奏云，输入密码即可下载。",
+      dl_note:"安装后如遇 SmartScreen 提示，点「更多资讯」→「仍要执行」。",
+      srv_kicker:"XiaoNan Browser Server", srv_title:"hello 开发者。", srv_sub:"为开发者而生的版本。控制台、调试，都为你准备好了。",
+      srv_f1_t:"开发者控制台", srv_f1_d:"F12 一键开启，完整调试工具，样式与网路一目了然。",
+      srv_f2_t:"触屏优化", srv_f2_d:"收藏旁的一键按钮，没有 F12 键也能开启开发者模式。",
+      srv_f3_t:"预设深色模式", srv_f3_d:"为开发者而生的深色介面，晚上写码也舒服。",
+      srv_cta:"下载 Server 开发者版", srv_pwd:"下载密码：123456",
+      ts_kicker:"即将发布", ts_title:"11.30。Pro 与 Server 登场。", ts_sub:"XiaoNan Browser Pro 与 Server 开发者版，将于 11 月 30 日正式发布。",
+      cd_d:"天", cd_h:"小时", cd_m:"分钟", cd_s:"秒",
+      ts_stay:"发布倒数",
+      ts3_b_std:"已发布", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"轻量快速 · 立即下载",
+      ts3_b_pro:"11.30 发布", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"更多的新功能",
+      ts3_b_srv:"11.30 发布", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"更自由的开发版",
+      ts_apple_t:"探索更多 · Apple 特别活动", ts_apple_d:"前往 Apple 官方特别活动页面。",
+      ftr_made:"由 xiaonan 制作",
+      cr_kicker:"致谢", cr_title:"开发人员清单",
+      cr_dev_t:"开发支持", cr_bug_t:"漏洞 / Bug / 意见 指・提出",
+      cr_ai:"AI 开发协力：豆包（Doubao）",
+      toast_dl:"安装包准备中，敬请期待",
+      dl_qr_t:"获取安装包", dl_qr_d:"安装包通过 QQ 群提供，加入群组即可下载。",
+      dl_qr_copy:"复制群号", dl_qr_join:"前往加群", dl_qr_copied:"已复制群号 1064568519",
+      pv_title:"iOS 版 · 开发中预览", pv_hint:"上下滑动浏览", pv_tag:"查看预览", pv_none:"预览图准备中，敬请期待",
+      pv_kicker:"开发预览", pv_t2:"iOS 版 · 开发中预览", pv_sub:"小楠浏览器，正在登陆 iPhone 与 iPad。",
+      pv_ph_t:"iPhone。掌心的小楠。", pv_ph_d:"手机上的小楠浏览器，保留熟悉的搜寻与壁纸体验，单手即可操作。",
+      pv_ph1_t:"主画面", pv_ph1_d:"小楠浏览器已登上你的主萤幕，一触即开。",
+      pv_ph2_t:"搜寻即答", pv_ph2_d:"搜寻、翻译、百科，一键直达你要的答案。",
+      pv_ph3_t:"浏览记录", pv_ph3_d:"最近看过的网页，随时找回。",
+      pv_ip_t:"iPad。更大的视野。", pv_ip_d:"平板上的小楠浏览器善用每一寸萤幕，多标签并排、阅读与多工更从容。",
+      pv_ip1_t:"标签页管理", pv_ip1_d:"多个分页一目了然，切换更顺手。",
+      pv_ip2_t:"专属首页", pv_ip2_d:"hello 与最近浏览，打开就是熟悉的小楠。",
+      pv_ip3_t:"浏览记录", pv_ip3_d:"平板上也能快速找回历史浏览。"
+    },
+    en: {
+      brand:"XiaoNan Browser",
+      nav_features:"Features", nav_devices:"Devices", nav_preview:"Preview", nav_event:"Event", nav_download:"Download", nav_support:"Support",
+      hero_eyebrow:"by xiaonan",
+      hero_title:"XiaoNan Browser.",
+      hero_sub:"Fast. Simple. Open source. Your next browser.",
+      hero_cta1:"Download Free", hero_cta2:"Learn more",
+      hero_note:"Version 1.3.0 · 140 MB · Windows 7 – 11",
+      ft_kicker:"Features", ft_title:"Just right. Just the browser you need.", ft_sub:"Every feature, tuned for everyday browsing.",
+      ft1_t:"Save. Your way.", ft1_d:"One-click bookmarks that survive reinstalls.",
+      ft2_t:"Invisible. In and out.", ft2_d:"No history, cookies or cache left behind.",
+      ft3_t:"Dark. Easy on your eyes.", ft3_d:"UI and sites dim together.",
+      ft4_t:"Downloads. At a glance.", ft4_d:"Progress, status and one-click open.",
+      ft5_t:"History. Revisit anytime.", ft5_d:"Keeps your latest 200 pages.",
+      ft6_t:"Yours. Your call.", ft6_d:"Custom wallpaper, solid color or blur.",
+      dv_kicker:"Devices", dv_title:"One browser. Every device.", dv_sub:"Looks great on any screen.",
+      dv_chip:"Windows 7 / 8 / 10 / 11 supported",
+      dv_s_mac:"macOS · Not yet",
+      dv_s_win:"Windows · Released (exe)",
+      dv_s_ipad:"iPadOS · In development",
+      dv_s_iphone:"iOS · In development",
+      dv_s_android:"Android · Not yet",
+      sy_kicker:"Support", sy_title:"System requirements", sy_sub:"If it runs, it runs well.",
+      sy1_t:"Windows 7 – 11", sy1_d:"Supports Windows 7 / 8 / 10 / 11 (x64), even on older PCs.",
+      sy_mac_t:"macOS", sy_mac_d:"macOS Tahoe and later, native experience.",
+      sy_ios_t:"iOS 16 – 26", sy_ios_d:"For iPhone & iPad, iOS 16 and above.",
+      sy_and_t:"Android 14+", sy_and_d:"Android 14 and later.",
+      sy2_t:"Built-in WebView2 engine", sy2_d:"Edge's Chromium engine inside. Opens any website.",
+      sy3_t:"Fully open source", sy3_d:"The code is completely open. Modify it your way.",
+      sy4_t:"Video unsupported on 3.0 only", sy4_d:"3.0 has no video playback; Pro and Server support video fully (Bilibili / Douyin / Kuaishou).",
+      dl_kicker:"Download", dl_title:"Download XiaoNan Browser", dl_sub:"Free. Light. Open source. Get started now.",
+      ver_kicker:"Compare Versions", ver_title:"Three versions, each with its own edge.", ver_sub:"Pick the XiaoNan Browser that fits you best.",
+      ver_b_std:"Standard", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"Light and fast. The everyday pick.",
+      ver_f1_std:"No video playback", ver_f2_std:"New WebView2 engine — installer only 35 MB", ver_f3_std:"One-click migration to Pro / Server",
+      ver_b_pro:"Pro", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"More new features.",
+      ver_f1_pro:"Full video playback (Bilibili / Douyin / Kuaishou)", ver_f2_pro:"Tab bookmarks (Ctrl+Alt+T)", ver_f3_pro:"One-click migration from 3.0 (history / bookmarks)",
+      ver_b_srv:"Server Dev", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"A freer developer edition.",
+      ver_f1_srv:"Developer Console (F12)", ver_f2_srv:"Full video playback + touch optimization", ver_f3_srv:"Dark mode by default, built for developers",
+      dl_v:"Version 1.3.0", dl_s:"140 MB",
+      dl_sign:"Publisher: Xiao Nan Account (signed)", dl_dev:"Developer: xiaonan",
+      dl_btn:"Download Now",
+      dlc_title:"Choose Your Version", dlc_sub:"Three editions, one choice.",
+      dlc_b_std:"Standard", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · v3.0",
+      dlc_f1_std:"No video playback. Light & fast.", dlc_f2_std:"Video sites show \"Playback not supported\" — toggle it on in Settings",
+      dlc_b_pro:"Pro", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · v2.0",
+      dlc_f1_pro:"Video playback (Bilibili / Douyin / Kuaishou)", dlc_f2_pro:"Tab bookmarks (Ctrl+Alt+T)", dlc_f3_pro:"One-click migration from 3.0 (history / bookmarks)",
+      dlc_b_srv:"Server Dev", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · v2.0",
+      dlc_f1_srv:"Built-in DevTools (F12)", dlc_f2_srv:"Dark mode by default, for developers", dlc_f3_srv:"Touch-friendly: one-tap DevTools next to bookmarks",
+      dlc_btn:"Download", dlc_note:"Password: 123456 (same for all editions). Click Download to open Lanzou Cloud and enter the password.",
+      dl_note:"If SmartScreen warns you, click \"More info\" → \"Run anyway\".",
+      srv_kicker:"XiaoNan Browser Server", srv_title:"hello, Developer.", srv_sub:"Built for developers. DevTools and debugging, ready for you.",
+      srv_f1_t:"Developer Console", srv_f1_d:"Press F12 for full DevTools — styles and network at a glance.",
+      srv_f2_t:"Touch-friendly", srv_f2_d:"A one-tap button beside bookmarks opens DevTools without an F12 key.",
+      srv_f3_t:"Dark by Default", srv_f3_d:"A dark interface built for developers. Easier on the eyes at night.",
+      srv_cta:"Download Server Dev Edition", srv_pwd:"Password: 123456",
+      ts_kicker:"Launching soon", ts_title:"11.30. Pro & Server arrive.", ts_sub:"XiaoNan Browser Pro and Server Dev Edition launch officially on November 30.",
+      cd_d:"days", cd_h:"hrs", cd_m:"min", cd_s:"sec",
+      ts_stay:"Countdown to launch",
+      ts3_b_std:"Released", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"Light & fast · Download now",
+      ts3_b_pro:"Nov 30", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"More new features",
+      ts3_b_srv:"Nov 30", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"A freer developer edition",
+      ts_apple_t:"Explore more · Apple Special Event", ts_apple_d:"Visit Apple's official Special Event page.",
+      ftr_made:"Made by xiaonan",
+      cr_kicker:"Credits", cr_title:"Development Team",
+      cr_dev_t:"Development support", cr_bug_t:"Bugs / Issues / Feedback",
+      cr_ai:"AI development partner: Doubao",
+      toast_dl:"Installer coming soon",
+      dl_qr_t:"Get the installer", dl_qr_d:"The installer is shared in our QQ group. Join to download.",
+      dl_qr_copy:"Copy group no.", dl_qr_join:"Join group", dl_qr_copied:"Copied: 1064568519",
+      pv_title:"iOS · In-development preview", pv_hint:"Scroll to browse", pv_tag:"Preview", pv_none:"Preview coming soon",
+      pv_kicker:"Preview", pv_t2:"iOS · In-development preview", pv_sub:"XiaoNan Browser is coming to iPhone and iPad.",
+      pv_ph_t:"iPhone. XiaoNan in your palm.", pv_ph_d:"The familiar search-and-wallpaper experience, now one-handed on your phone.",
+      pv_ph1_t:"Home screen", pv_ph1_d:"XiaoNan Browser on your home screen — one tap away.",
+      pv_ph2_t:"Search, answered", pv_ph2_d:"Search, translate and look up — straight to the answer.",
+      pv_ph3_t:"History", pv_ph3_d:"Everything you viewed, right back at your fingertips.",
+      pv_ip_t:"iPad. A wider view.", pv_ip_d:"Made for the bigger canvas — tabs side by side, reading and multitasking with room to breathe.",
+      pv_ip1_t:"Tab manager", pv_ip1_d:"All your tabs at a glance, switching with ease.",
+      pv_ip2_t:"Your home", pv_ip2_d:"hello and recent pages — XiaoNan, right where you left it.",
+      pv_ip3_t:"History", pv_ip3_d:"Find past pages quickly on the big canvas."
+    }
+  };
+
+  var lang = 'zh';
+  var DOWNLOAD_URL = ''; // TODO: 安裝包公開網址
+
+  function applyLang(){
+    var dict = I18N[lang];
+    document.documentElement.lang = (lang === 'zh') ? 'zh-Hant' : (lang === 'en' ? 'en' : 'zh-Hans');
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.getElementById('langBtn').textContent = (lang === 'zh') ? 'EN' : (lang === 'en' ? '簡' : '繁');
+    document.getElementById('dlBigBtn').textContent = dict.dl_btn;
+  }
+
+  document.getElementById('langBtn').addEventListener('click', function(){
+    lang = (lang === 'zh') ? 'en' : (lang === 'en') ? 'sc' : 'zh';
+    applyLang();
+  });
+
+  // ===== 下載按鈕 =====
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+  function handleDownload(){ openDlChoose(); }
+  document.getElementById('dlBigBtn').addEventListener('click', handleDownload);
+  document.getElementById('dlBtn').addEventListener('click', handleDownload);
+
+  // ===== 下載版本選擇彈窗 =====
+  function openDlChoose(){ document.getElementById('dlChoose').classList.add('show'); }
+  function closeDlChoose(){ document.getElementById('dlChoose').classList.remove('show'); }
+  document.getElementById('dlChoose').addEventListener('click', function(e){ if (e.target === this) closeDlChoose(); });
+  var DL_LINKS = {
+    std:"https://wwbfs.lanzouv.com/i4Nb74c7ochc",
+    pro:"https://wwbfs.lanzouv.com/iGNQb4c66qpa",
+    srv:"https://wwbfs.lanzouv.com/iPPcP4c66t2f"
+  };
+  function goDl(k){ if (DL_LINKS[k]) location.href = DL_LINKS[k]; }
+
+  // ===== 下載彈窗（QQ 群） =====
+  function openDlModal(){ document.getElementById('dlModal').classList.add('show'); }
+  function closeDlModal(){ document.getElementById('dlModal').classList.remove('show'); }
+  function copyGroup(){
+    var t = document.getElementById('toast');
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText('1064568519').then(function(){
+        t.textContent = I18N[lang].dl_qr_copied; t.classList.add('show');
+        setTimeout(function(){ t.classList.remove('show'); }, 2000);
+      });
+    } else {
+      t.textContent = 'QQ 群：1064568519'; t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 2600);
+    }
+  }
+  function joinGroup(){ window.open('https://qm.qq.com/q/1064568519', '_blank', 'noopener'); }
+  document.getElementById('dlModal').addEventListener('click', function(e){ if (e.target === this) closeDlModal(); });
+
+  // ===== 設備預覽層 =====
+  function openPv(){ document.getElementById('pvModal').classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function closePv(){ document.getElementById('pvModal').classList.remove('show'); document.body.style.overflow = ''; }
+  document.getElementById('pvModal').addEventListener('click', function(e){ if (e.target === this) closePv(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ closeDlModal(); closePv(); } });
+
+  // ===== 倒計時：11月30日 =====
+  function pad(n){ return (n<10?'0':'')+n; }
+  function tick(){
+    var target = new Date(2026, 10, 30, 0, 0, 0); // 2026-11-30 00:00 本地時區
+    var diff = target.getTime() - Date.now();
+    if (diff <= 0){ diff = 0; }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff % 86400000 / 3600000);
+    var m = Math.floor(diff % 3600000 / 60000);
+    var s = Math.floor(diff % 60000 / 1000);
+    document.getElementById('cd-d').textContent = pad(d);
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // ===== 滾動揭示 =====
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>

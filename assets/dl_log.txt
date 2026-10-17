@@ -1,0 +1,3 @@
+iphone.png: 132979
+ipad.png: 29311
+macbook.png: 25562

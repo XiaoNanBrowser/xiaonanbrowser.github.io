@@ -1,0 +1,2 @@
+OK: C:\Users\Colorful\Doubao\chats\2026-10-15\new-chat\xiaonan-browser\assets\icon_source.png -> C:\Users\Colorful\Doubao\chats\2026-10-15\new-chat\xiaonan-browser\assets\icon.png (512 x 512)
+OK: C:\Users\Colorful\Doubao\chats\2026-10-15\new-chat\xiaonan-browser\assets\wallpaper.jpg -> C:\Users\Colorful\Doubao\chats\2026-10-15\new-chat\xiaonan-browser\assets\wallpaper_web.jpg (749 x 739)
