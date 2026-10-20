@@ -19,6 +19,7 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"XiaoNan Browser","alternateName":"小楠瀏覽器","operatingSystem":"Windows 7, 8, 10, 11","applicationCategory":"BrowserApplication","description":"輕量、開源、支援影片播放的 Windows 瀏覽器。","author":{"@type":"Person","name":"xiaonan"},"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}
 </script>
 <link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="preload" as="image" href="assets/wallpaper_web.jpg">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap">
 <style>
   :root{
@@ -704,7 +705,7 @@
       </div>
       <div class="sys-card sys-warn reveal">
         <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3L2 20h20L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 10v4M12 17.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div><h3 data-i18n="sy4_t">僅 3.0 不支援影片播放</h3><p data-i18n="sy4_d">3.0 不帶影片播放；Pro / Server 版完整支援影片播放（B站 / 抖音 / 快手）。</p></div>
+        <div><h3 data-i18n="sy4_t">全版本完整支援影片播放</h3><p data-i18n="sy4_d">3.0 / Pro / Server 均完整支援影片播放（B站 / 抖音 / 快手），打開即看。</p></div>
       </div>
     </div>
   </div>
@@ -724,7 +725,7 @@
         <h3 data-i18n="ver_n_std">XiaoNan Browser 3.0</h3>
         <p class="ver-desc" data-i18n="ver_d_std">輕量快速，日常瀏覽首選。</p>
         <ul>
-          <li data-i18n="ver_f1_std">不支援影片播放</li>
+          <li data-i18n="ver_f1_std">完整影片播放（B站 / 抖音 / 快手）</li>
           <li data-i18n="ver_f2_std">全新 WebView2 內核，安裝包僅 35 MB</li>
           <li data-i18n="ver_f3_std">資料可一鍵遷移到 Pro / Server</li>
         </ul>
@@ -868,15 +869,15 @@
       </div>
       <div class="pv-cards">
         <div class="pv-card">
-          <img class="pv-shot" src="assets/ios/08.png" alt="iPhone 主畫面">
+          <img class="pv-shot" src="assets/ios/08.png" alt="iPhone 主畫面" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ph1_t">主畫面</h4><p data-i18n="pv_ph1_d">小楠瀏覽器已登上你的主螢幕，一觸即開。</p></div>
         </div>
         <div class="pv-card">
-          <img class="pv-shot" src="assets/ios/09.png" alt="iPhone 搜尋">
+          <img class="pv-shot" src="assets/ios/09.png" alt="iPhone 搜尋" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ph2_t">搜尋即答</h4><p data-i18n="pv_ph2_d">搜尋、翻譯、百科，一鍵直達你要的答案。</p></div>
         </div>
         <div class="pv-card">
-          <img class="pv-shot" src="assets/ios/12.png" alt="iPhone 瀏覽記錄">
+          <img class="pv-shot" src="assets/ios/12.png" alt="iPhone 瀏覽記錄" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ph3_t">瀏覽記錄</h4><p data-i18n="pv_ph3_d">最近看過的網頁，隨時找回。</p></div>
         </div>
       </div>
@@ -890,15 +891,15 @@
       </div>
       <div class="pv-cards">
         <div class="pv-card pv-ipad-card">
-          <img class="pv-shot" src="assets/ios/01.png" alt="iPad 標籤頁">
+          <img class="pv-shot" src="assets/ios/01.png" alt="iPad 標籤頁" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ip1_t">標籤頁管理</h4><p data-i18n="pv_ip1_d">多個分頁一目瞭然，切換更順手。</p></div>
         </div>
         <div class="pv-card pv-ipad-card">
-          <img class="pv-shot" src="assets/ios/02.png" alt="iPad 首頁">
+          <img class="pv-shot" src="assets/ios/02.png" alt="iPad 首頁" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ip2_t">專屬首頁</h4><p data-i18n="pv_ip2_d">hello 與最近瀏覽，打開就是熟悉的小楠。</p></div>
         </div>
         <div class="pv-card pv-ipad-card">
-          <img class="pv-shot" src="assets/ios/03.png" alt="iPad 瀏覽記錄">
+          <img class="pv-shot" src="assets/ios/03.png" alt="iPad 瀏覽記錄" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ip3_t">瀏覽記錄</h4><p data-i18n="pv_ip3_d">平板上也能快速找回歷史瀏覽。</p></div>
         </div>
       </div>
@@ -941,7 +942,7 @@
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
-      <img src="assets/icon.png" alt="">
+      <img src="assets/icon.png" alt="" loading="lazy" decoding="async">
       <span>XiaoNan Browser</span>
     </div>
     <div class="foot-right">
@@ -973,8 +974,8 @@
         <h4 data-i18n="dlc_n_std">XiaoNan Browser 3.0</h4>
         <div class="dlc-meta" data-i18n="dlc_m_std">35 MB · 版本 3.0</div>
         <ul class="dlc-fea">
-          <li data-i18n="dlc_f1_std">不帶影片播放，輕量快速</li>
-          <li data-i18n="dlc_f2_std">影片站顯示「不支援瀏覽器播放影片」</li>
+          <li data-i18n="dlc_f1_std">完整影片播放（B站 / 抖音 / 快手）</li>
+          <li data-i18n="dlc_f2_std">全新 WebView2 內核，播放流暢省資源</li>
         </ul>
         <a class="dlc-btn" href="https://wwbfs.lanzouv.com/i4Nb74c7ochc"><span data-i18n="dlc_btn">下載</span></a>
       </div>
@@ -1012,21 +1013,21 @@
       <button class="pv-close" onclick="closePv()" aria-label="close">&#x2715;</button>
     </div>
     <div class="pv-scroll">
-      <img class="pv-wide" src="assets/ios/01.png" alt="iOS 預覽 1">
-      <img class="pv-wide" src="assets/ios/02.png" alt="iOS 預覽 2">
-      <img class="pv-wide" src="assets/ios/03.png" alt="iOS 預覽 3">
-      <img class="pv-wide" src="assets/ios/04.png" alt="iOS 預覽 4">
-      <img class="pv-wide" src="assets/ios/05.png" alt="iOS 預覽 5">
-      <img class="pv-wide" src="assets/ios/06.png" alt="iOS 預覽 6">
-      <img class="pv-wide" src="assets/ios/07.png" alt="iOS 預覽 7">
-      <img class="pv-tall" src="assets/ios/08.png" alt="iOS 預覽 8">
-      <img class="pv-tall" src="assets/ios/09.png" alt="iOS 預覽 9">
-      <img class="pv-tall" src="assets/ios/10.png" alt="iOS 預覽 10">
-      <img class="pv-tall" src="assets/ios/11.png" alt="iOS 預覽 11">
-      <img class="pv-tall" src="assets/ios/12.png" alt="iOS 預覽 12">
-      <img class="pv-tall" src="assets/ios/13.png" alt="iOS 預覽 13">
-      <img class="pv-tall" src="assets/ios/14.png" alt="iOS 預覽 14">
-      <img class="pv-tall" src="assets/ios/15.png" alt="iOS 預覽 15">
+      <img class="pv-wide" src="assets/ios/01.png" alt="iOS 預覽 1" loading="lazy" decoding="async">
+      <img class="pv-wide" src="assets/ios/02.png" alt="iOS 預覽 2" loading="lazy" decoding="async">
+      <img class="pv-wide" src="assets/ios/03.png" alt="iOS 預覽 3" loading="lazy" decoding="async">
+      <img class="pv-wide" src="assets/ios/04.png" alt="iOS 預覽 4" loading="lazy" decoding="async">
+      <img class="pv-wide" src="assets/ios/05.png" alt="iOS 預覽 5" loading="lazy" decoding="async">
+      <img class="pv-wide" src="assets/ios/06.png" alt="iOS 預覽 6" loading="lazy" decoding="async">
+      <img class="pv-wide" src="assets/ios/07.png" alt="iOS 預覽 7" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/08.png" alt="iOS 預覽 8" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/09.png" alt="iOS 預覽 9" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/10.png" alt="iOS 預覽 10" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/11.png" alt="iOS 預覽 11" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/12.png" alt="iOS 預覽 12" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/13.png" alt="iOS 預覽 13" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/14.png" alt="iOS 預覽 14" loading="lazy" decoding="async">
+      <img class="pv-tall" src="assets/ios/15.png" alt="iOS 預覽 15" loading="lazy" decoding="async">
     </div>
   </div>
 </div>
@@ -1064,11 +1065,11 @@
       sy_and_t:"Android 14 及以上", sy_and_d:"支援 Android 14 及更新版本。",
       sy2_t:"內置 WebView2 內核", sy2_d:"基於 Edge 同款 Chromium 內核，真正開啟任何網站。",
       sy3_t:"完整開源", sy3_d:"程式碼完全開放，想怎麼改都行。",
-      sy4_t:"僅 3.0 不支援影片播放", sy4_d:"3.0 不帶影片播放；Pro / Server 版完整支援影片播放（B站 / 抖音 / 快手）。",
+      sy4_t:"全版本完整支援影片播放", sy4_d:"3.0 / Pro / Server 均完整支援影片播放（B站 / 抖音 / 快手），打開即看。",
       dl_kicker:"下載", dl_title:"下載 XiaoNan Browser", dl_sub:"免費、輕量、開源。現在就開始。",
       ver_kicker:"版本比較", ver_title:"三個版本，各有擅場。", ver_sub:"選一款最適合你的小楠瀏覽器。",
       ver_b_std:"普通版", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"輕量快速，日常瀏覽首選。",
-      ver_f1_std:"不支援影片播放", ver_f2_std:"全新 WebView2 內核，安裝包僅 35 MB", ver_f3_std:"資料可一鍵遷移到 Pro / Server",
+      ver_f1_std:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_std:"全新 WebView2 內核，安裝包僅 35 MB", ver_f3_std:"資料可一鍵遷移到 Pro / Server",
       ver_b_pro:"Pro 版", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"更多的新功能。",
       ver_f1_pro:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_pro:"標籤功能（Ctrl+Alt+T）", ver_f3_pro:"一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）",
       ver_b_srv:"Server 開發者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的開發版。",
@@ -1078,7 +1079,7 @@
       dl_btn:"立即下載",
       dlc_title:"選擇你的版本", dlc_sub:"三款版本，任你選擇。",
       dlc_b_std:"普通版", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · 版本 3.0",
-      dlc_f1_std:"不帶影片播放，輕量快速", dlc_f2_std:"影片站顯示「不支援瀏覽器播放影片」，可在設定開啟",
+      dlc_f1_std:"完整影片播放（B站 / 抖音 / 快手）", dlc_f2_std:"全新 WebView2 內核，播放流暢省資源",
       dlc_b_pro:"Pro 版", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · 版本 2.0",
       dlc_f1_pro:"影片播放（B站 / 抖音 / 快手）", dlc_f2_pro:"標籤功能（Ctrl+Alt+T）", dlc_f3_pro:"一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）",
       dlc_b_srv:"Server 開發者版", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · 版本 2.0",
@@ -1144,11 +1145,11 @@
       sy_and_t:"Android 14 及以上", sy_and_d:"支援 Android 14 及更新版本。",
       sy2_t:"内置 WebView2 内核", sy2_d:"基于 Edge 同款 Chromium 内核，真正开启任何网站。",
       sy3_t:"完整开源", sy3_d:"程式码完全开放，想怎么改都行。",
-      sy4_t:"仅 3.0 不支援影片播放", sy4_d:"3.0 不带影片播放；Pro / Server 版完整支援影片播放（B站 / 抖音 / 快手）。",
+      sy4_t:"全版本完整支援影片播放", sy4_d:"3.0 / Pro / Server 均完整支援影片播放（B站 / 抖音 / 快手），打开即看。",
       dl_kicker:"下载", dl_title:"下载 XiaoNan Browser", dl_sub:"免费、轻量、开源。现在就开始。",
       ver_kicker:"版本比较", ver_title:"三个版本，各有擅场。", ver_sub:"选一款最适合你的小楠浏览器。",
       ver_b_std:"普通版", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"轻量快速，日常浏览首选。",
-      ver_f1_std:"不支援影片播放", ver_f2_std:"全新 WebView2 内核，安装包仅 35 MB", ver_f3_std:"资料可一键迁移到 Pro / Server",
+      ver_f1_std:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_std:"全新 WebView2 内核，安装包仅 35 MB", ver_f3_std:"资料可一键迁移到 Pro / Server",
       ver_b_pro:"Pro 版", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"更多的新功能。",
       ver_f1_pro:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_pro:"标签功能（Ctrl+Alt+T）", ver_f3_pro:"一键迁移 3.0 资料（浏览记录 / 收藏夹）",
       ver_b_srv:"Server 开发者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的开发版。",
@@ -1158,7 +1159,7 @@
       dl_btn:"立即下载",
       dlc_title:"选择你的版本", dlc_sub:"三款版本，任你选择。",
       dlc_b_std:"普通版", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · 版本 3.0",
-      dlc_f1_std:"不带影片播放，轻量快速", dlc_f2_std:"影片站显示「不支援浏览器播放影片」，可在设定开启",
+      dlc_f1_std:"完整影片播放（B站 / 抖音 / 快手）", dlc_f2_std:"全新 WebView2 内核，播放流畅省资源",
       dlc_b_pro:"Pro 版", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · 版本 2.0",
       dlc_f1_pro:"影片播放（B站 / 抖音 / 快手）", dlc_f2_pro:"标签功能（Ctrl+Alt+T）", dlc_f3_pro:"一键迁移 3.0 资料（浏览记录 / 收藏夹）",
       dlc_b_srv:"Server 开发者版", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · 版本 2.0",
@@ -1224,11 +1225,11 @@
       sy_and_t:"Android 14+", sy_and_d:"Android 14 and later.",
       sy2_t:"Built-in WebView2 engine", sy2_d:"Edge's Chromium engine inside. Opens any website.",
       sy3_t:"Fully open source", sy3_d:"The code is completely open. Modify it your way.",
-      sy4_t:"Video unsupported on 3.0 only", sy4_d:"3.0 has no video playback; Pro and Server support video fully (Bilibili / Douyin / Kuaishou).",
+      sy4_t:"Full video playback on all editions", sy4_d:"3.0, Pro and Server all play video (Bilibili / Douyin / Kuaishou) out of the box.",
       dl_kicker:"Download", dl_title:"Download XiaoNan Browser", dl_sub:"Free. Light. Open source. Get started now.",
       ver_kicker:"Compare Versions", ver_title:"Three versions, each with its own edge.", ver_sub:"Pick the XiaoNan Browser that fits you best.",
       ver_b_std:"Standard", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"Light and fast. The everyday pick.",
-      ver_f1_std:"No video playback", ver_f2_std:"New WebView2 engine — installer only 35 MB", ver_f3_std:"One-click migration to Pro / Server",
+      ver_f1_std:"Full video playback (Bilibili / Douyin / Kuaishou)", ver_f2_std:"New WebView2 engine — installer only 35 MB", ver_f3_std:"One-click migration to Pro / Server",
       ver_b_pro:"Pro", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"More new features.",
       ver_f1_pro:"Full video playback (Bilibili / Douyin / Kuaishou)", ver_f2_pro:"Tab bookmarks (Ctrl+Alt+T)", ver_f3_pro:"One-click migration from 3.0 (history / bookmarks)",
       ver_b_srv:"Server Dev", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"A freer developer edition.",
@@ -1238,7 +1239,7 @@
       dl_btn:"Download Now",
       dlc_title:"Choose Your Version", dlc_sub:"Three editions, one choice.",
       dlc_b_std:"Standard", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · v3.0",
-      dlc_f1_std:"No video playback. Light & fast.", dlc_f2_std:"Video sites show \"Playback not supported\" — toggle it on in Settings",
+      dlc_f1_std:"Full video playback (Bilibili / Douyin / Kuaishou)", dlc_f2_std:"New WebView2 engine — smooth & lightweight",
       dlc_b_pro:"Pro", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · v2.0",
       dlc_f1_pro:"Video playback (Bilibili / Douyin / Kuaishou)", dlc_f2_pro:"Tab bookmarks (Ctrl+Alt+T)", dlc_f3_pro:"One-click migration from 3.0 (history / bookmarks)",
       dlc_b_srv:"Server Dev", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · v2.0",
