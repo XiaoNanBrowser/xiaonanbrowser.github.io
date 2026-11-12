@@ -413,7 +413,7 @@
   .dlc-box{position:relative;background:#17171e;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:34px 36px 28px;max-width:780px;width:100%;text-align:center;animation:pop .22s ease;max-height:92vh;overflow:auto}
   .dlc-box h3{font-size:21px;font-weight:600;margin-bottom:6px}
   .dlc-sub{font-size:13px;color:var(--text-dim);margin-bottom:22px}
-  .dlc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+  .dlc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;text-align:left}
   .dlc-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px 16px;display:flex;flex-direction:column}
   .dlc-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--accent);background:rgba(41,151,255,.12);border:1px solid rgba(41,151,255,.3);border-radius:999px;padding:3px 10px;margin-bottom:12px;align-self:flex-start}
   .dlc-card h4{font-size:17px;font-weight:600;margin-bottom:4px}
@@ -671,7 +671,7 @@
         <div class="brow brow-app brow-phone brow-shot-wrap">
           <img class="brow-shot" src="assets/watch.png" alt="Watch 版預覽" loading="lazy" decoding="async">
         </div>
-        <div class="dev-status st-dev"><i></i><span data-i18n="dv_s_watch">手錶版 · 正在開發</span><span class="dev-pv-none">暫無預覽</span></div>
+        <div class="dev-status st-dev"><i></i><span data-i18n="dv_s_watch">手錶版 · Beta 測試中</span><span class="dev-pv-none">暫無預覽</span></div>
       </div>
 
       <div class="dev-card reveal" onclick="showToast(I18N[lang].pv_none)" style="cursor:pointer">
@@ -781,7 +781,7 @@
         <ul>
           <li data-i18n="ver_f1_watch">手錶專用介面，抬腕即用</li>
           <li data-i18n="ver_f2_watch">輕量省電，長時間待機</li>
-          <li data-i18n="ver_f3_watch">11.30 登場</li>
+          <li data-i18n="ver_f3_watch">Beta 測試中</li>
         </ul>
       </div>
     </div>
@@ -868,8 +868,8 @@
         <h4 data-i18n="ts3_n_pro">XiaoNan Browser Pro</h4>
         <p data-i18n="ts3_d_pro">更多的新功能</p>
       </a>
-      <a class="ts-card" href="javascript:void(0)" onclick="showToast(I18N[lang].toast_dl)">
-        <span class="ts-badge ts-badge-coming" data-i18n="ts3_b_watch">11.30 發布</span>
+      <a class="ts-card" href="https://wwbfs.lanzouv.com/iZLwV4fpbxsh">
+        <span class="ts-badge ts-badge-coming" data-i18n="ts3_b_watch">Beta · 未發布</span>
         <h4 data-i18n="ts3_n_watch">XiaoNan Browser Watch</h4>
         <p data-i18n="ts3_d_watch">手錶專用瀏覽器</p>
       </a>
@@ -1054,6 +1054,16 @@
         </ul>
         <a class="dlc-btn" href="https://wwbfs.lanzouv.com/iPPcP4c66t2f"><span data-i18n="dlc_btn">下載</span></a>
       </div>
+      <div class="dlc-card">
+        <span class="dlc-badge" data-i18n="dlc_b_watch">Watch · Beta</span>
+        <h4 data-i18n="dlc_n_watch">XiaoNan Browser Watch</h4>
+        <div class="dlc-meta" data-i18n="dlc_m_watch">137 KB · Beta v1.0.0</div>
+        <ul class="dlc-fea">
+          <li data-i18n="dlc_f1_watch">手錶專用介面，抬腕即用</li>
+          <li data-i18n="dlc_f2_watch">輕量省電，長時間待機</li>
+        </ul>
+        <a class="dlc-btn" href="https://wwbfs.lanzouv.com/iZLwV4fpbxsh"><span data-i18n="dlc_btn">下載</span></a>
+      </div>
     </div>
     <p class="dlc-note" data-i18n="dlc_note">下載連結即將開放，敬請期待。</p>
   </div>
@@ -1110,7 +1120,7 @@
       dv_s_win:"Windows 版 · 已發佈（exe）",
       dv_s_ipad:"iPadOS 版 · 正在開發",
       dv_s_iphone:"iOS 版 · 正在開發",
-      dv_s_watch:"手錶版 · 正在開發",
+      dv_s_watch:"手錶版 · Beta 測試中",
       dv_s_android:"安卓版 · 暫未開發",
       sy_kicker:"支援", sy_title:"系統需求", sy_sub:"裝得下，就跑得順。",
       sy1_t:"Windows 10 – 11", sy1_d:"支援 Windows 10 / 11（x64）。",
@@ -1130,18 +1140,20 @@
       ver_b_srv:"Server 開發者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的開發版。",
       ver_f1_srv:"開發者控制台（F12）", ver_f2_srv:"完整影片播放 + 觸屏優化", ver_f3_srv:"預設深色模式，為開發者而生",
       ver_b_watch:"手錶版", ver_n_watch:"XiaoNan Browser Watch", ver_d_watch:"手錶專用瀏覽器。",
-      ver_f1_watch:"手錶專用介面，抬腕即用", ver_f2_watch:"輕量省電，長時間待機", ver_f3_watch:"11.30 登場",
+      ver_f1_watch:"手錶專用介面，抬腕即用", ver_f2_watch:"輕量省電，長時間待機", ver_f3_watch:"Beta 測試中",
       dl_v:"版本 1.3.0", dl_s:"140 MB",
       dl_sign:"發布者：Xiao Nan Account（數位簽章）", dl_dev:"開發者：xiaonan",
       dl_btn:"立即下載",
-      dlc_title:"選擇你的版本", dlc_sub:"三款版本，任你選擇。",
+      dlc_title:"選擇你的版本", dlc_sub:"四款版本，任你選擇。",
       dlc_b_std:"普通版", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · 版本 3.0",
       dlc_f1_std:"完整影片播放（B站 / 抖音 / 快手）", dlc_f2_std:"全新 WebView2 內核，播放流暢省資源",
       dlc_b_pro:"Pro 版", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · 版本 2.0",
       dlc_f1_pro:"影片播放（B站 / 抖音 / 快手）", dlc_f2_pro:"標籤功能（Ctrl+Alt+T）", dlc_f3_pro:"一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）",
       dlc_b_srv:"Server 開發者版", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · 版本 2.0",
       dlc_f1_srv:"開發者控制台（F12）", dlc_f2_srv:"預設深色模式，為開發者而生", dlc_f3_srv:"觸屏優化：收藏旁一鍵開啟開發者模式",
-      dlc_btn:"下載", dlc_note:"下載密碼：123456（三個版本通用）。點擊「下載」前往藍奏雲，輸入密碼即可下載。",
+      dlc_b_watch:"Watch · Beta", dlc_n_watch:"XiaoNan Browser Watch", dlc_m_watch:"137 KB · Beta v1.0.0",
+      dlc_f1_watch:"手錶專用介面，抬腕即用", dlc_f2_watch:"輕量省電，長時間待機",
+      dlc_btn:"下載", dlc_note:"下載密碼：123456（四個版本通用）。點擊「下載」前往藍奏雲，輸入密碼即可下載。",
       dl_note:"安裝後如遇 SmartScreen 提示，點「更多資訊」→「仍要執行」。",
       srv_kicker:"XiaoNan Browser Server", srv_title:"hello 開發者。", srv_sub:"為開發者而生的版本。控制台、調試，都為你準備好了。",
       srv_f1_t:"開發者控制台", srv_f1_d:"F12 一鍵開啟，完整調試工具，樣式與網路一目瞭然。",
@@ -1154,7 +1166,7 @@
       ts3_b_std:"已發布", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"輕量快速 · 立即下載",
       ts3_b_pro:"11.30 發布", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"更多的新功能",
       ts3_b_srv:"11.30 發布", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"更自由的開發版",
-      ts3_b_watch:"11.30 發布", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"手錶專用瀏覽器",
+      ts3_b_watch:"Beta · 未發布", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"手錶專用瀏覽器",
       ts_apple_t:"探索更多 · Apple 特別活動", ts_apple_d:"前往 Apple 官方特別活動頁面。",
       ftr_made:"由 xiaonan 製作",
       cr_kicker:"致謝", cr_title:"開發人員清單",
@@ -1197,7 +1209,7 @@
       dv_s_win:"Windows 版 · 已发布（exe）",
       dv_s_ipad:"iPadOS 版 · 正在开发",
       dv_s_iphone:"iOS 版 · 正在开发",
-      dv_s_watch:"手表版 · 正在开发",
+      dv_s_watch:"手表版 · Beta 测试中",
       dv_s_android:"安卓版 · 暂未开发",
       sy_kicker:"支援", sy_title:"系统需求", sy_sub:"装得下，就跑得顺。",
       sy1_t:"Windows 10 – 11", sy1_d:"支援 Windows 10 / 11（x64）。",
@@ -1217,18 +1229,20 @@
       ver_b_srv:"Server 开发者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的开发版。",
       ver_f1_srv:"开发者控制台（F12）", ver_f2_srv:"完整影片播放 + 触屏优化", ver_f3_srv:"预设深色模式，为开发者而生",
       ver_b_watch:"手表版", ver_n_watch:"XiaoNan Browser Watch", ver_d_watch:"手表专用浏览器。",
-      ver_f1_watch:"手表专用界面，抬腕即用", ver_f2_watch:"轻量省电，长时间待机", ver_f3_watch:"11.30 登场",
+      ver_f1_watch:"手表专用界面，抬腕即用", ver_f2_watch:"轻量省电，长时间待机", ver_f3_watch:"Beta 测试中",
       dl_v:"版本 1.3.0", dl_s:"140 MB",
       dl_sign:"发布者：Xiao Nan Account（数位签章）", dl_dev:"开发者：xiaonan",
       dl_btn:"立即下载",
-      dlc_title:"选择你的版本", dlc_sub:"三款版本，任你选择。",
+      dlc_title:"选择你的版本", dlc_sub:"四款版本，任你选择。",
       dlc_b_std:"普通版", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · 版本 3.0",
       dlc_f1_std:"完整影片播放（B站 / 抖音 / 快手）", dlc_f2_std:"全新 WebView2 内核，播放流畅省资源",
       dlc_b_pro:"Pro 版", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · 版本 2.0",
       dlc_f1_pro:"影片播放（B站 / 抖音 / 快手）", dlc_f2_pro:"标签功能（Ctrl+Alt+T）", dlc_f3_pro:"一键迁移 3.0 资料（浏览记录 / 收藏夹）",
       dlc_b_srv:"Server 开发者版", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · 版本 2.0",
       dlc_f1_srv:"开发者控制台（F12）", dlc_f2_srv:"预设深色模式，为开发者而生", dlc_f3_srv:"触屏优化：收藏旁一键开启开发者模式",
-      dlc_btn:"下载", dlc_note:"下载密码：123456（三个版本通用）。点击「下载」前往蓝奏云，输入密码即可下载。",
+      dlc_b_watch:"Watch · Beta", dlc_n_watch:"XiaoNan Browser Watch", dlc_m_watch:"137 KB · Beta v1.0.0",
+      dlc_f1_watch:"手表专用界面，抬腕即用", dlc_f2_watch:"轻量省电，长时间待机",
+      dlc_btn:"下载", dlc_note:"下载密码：123456（四个版本通用）。点击「下载」前往蓝奏云，输入密码即可下载。",
       dl_note:"安装后如遇 SmartScreen 提示，点「更多资讯」→「仍要执行」。",
       srv_kicker:"XiaoNan Browser Server", srv_title:"hello 开发者。", srv_sub:"为开发者而生的版本。控制台、调试，都为你准备好了。",
       srv_f1_t:"开发者控制台", srv_f1_d:"F12 一键开启，完整调试工具，样式与网路一目了然。",
@@ -1241,7 +1255,7 @@
       ts3_b_std:"已发布", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"轻量快速 · 立即下载",
       ts3_b_pro:"11.30 发布", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"更多的新功能",
       ts3_b_srv:"11.30 发布", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"更自由的开发版",
-      ts3_b_watch:"11.30 发布", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"手表专用浏览器",
+      ts3_b_watch:"Beta · 未发布", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"手表专用浏览器",
       ts_apple_t:"探索更多 · Apple 特别活动", ts_apple_d:"前往 Apple 官方特别活动页面。",
       ftr_made:"由 xiaonan 制作",
       cr_kicker:"致谢", cr_title:"开发人员清单",
@@ -1284,7 +1298,7 @@
       dv_s_win:"Windows · Released (exe)",
       dv_s_ipad:"iPadOS · In development",
       dv_s_iphone:"iOS · In development",
-      dv_s_watch:"Watch · In development",
+      dv_s_watch:"Watch · In beta",
       dv_s_android:"Android · Not yet",
       sy_kicker:"Support", sy_title:"System requirements", sy_sub:"If it runs, it runs well.",
       sy1_t:"Windows 10 – 11", sy1_d:"Supports Windows 10 / 11 (x64).",
@@ -1304,17 +1318,19 @@
       ver_b_srv:"Server Dev", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"A freer developer edition.",
       ver_f1_srv:"Developer Console (F12)", ver_f2_srv:"Full video playback + touch optimization", ver_f3_srv:"Dark mode by default, built for developers",
       ver_b_watch:"Watch", ver_n_watch:"XiaoNan Browser Watch", ver_d_watch:"Browser for smartwatches.",
-      ver_f1_watch:"Watch-optimized UI, raise to view", ver_f2_watch:"Light and efficient, long standby", ver_f3_watch:"Arrives Nov 30",
+      ver_f1_watch:"Watch-optimized UI, raise to view", ver_f2_watch:"Light and efficient, long standby", ver_f3_watch:"In beta",
       dl_v:"Version 1.3.0", dl_s:"140 MB",
       dl_sign:"Publisher: Xiao Nan Account (signed)", dl_dev:"Developer: xiaonan",
       dl_btn:"Download Now",
-      dlc_title:"Choose Your Version", dlc_sub:"Three editions, one choice.",
+      dlc_title:"Choose Your Version", dlc_sub:"Four editions, one choice.",
       dlc_b_std:"Standard", dlc_n_std:"XiaoNan Browser 3.0", dlc_m_std:"35 MB · v3.0",
       dlc_f1_std:"Full video playback (Bilibili / Douyin / Kuaishou)", dlc_f2_std:"New WebView2 engine — smooth & lightweight",
       dlc_b_pro:"Pro", dlc_n_pro:"XiaoNan Browser Pro", dlc_m_pro:"35 MB · v2.0",
       dlc_f1_pro:"Video playback (Bilibili / Douyin / Kuaishou)", dlc_f2_pro:"Tab bookmarks (Ctrl+Alt+T)", dlc_f3_pro:"One-click migration from 3.0 (history / bookmarks)",
       dlc_b_srv:"Server Dev", dlc_n_srv:"XiaoNan Browser Server", dlc_m_srv:"35 MB · v2.0",
       dlc_f1_srv:"Built-in DevTools (F12)", dlc_f2_srv:"Dark mode by default, for developers", dlc_f3_srv:"Touch-friendly: one-tap DevTools next to bookmarks",
+      dlc_b_watch:"Watch · Beta", dlc_n_watch:"XiaoNan Browser Watch", dlc_m_watch:"137 KB · Beta v1.0.0",
+      dlc_f1_watch:"Watch-optimized UI, raise to view", dlc_f2_watch:"Light and efficient, long standby",
       dlc_btn:"Download", dlc_note:"Password: 123456 (same for all editions). Click Download to open Lanzou Cloud and enter the password.",
       dl_note:"If SmartScreen warns you, click \"More info\" → \"Run anyway\".",
       srv_kicker:"XiaoNan Browser Server", srv_title:"hello, Developer.", srv_sub:"Built for developers. DevTools and debugging, ready for you.",
@@ -1328,7 +1344,7 @@
       ts3_b_std:"Released", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"Light & fast · Download now",
       ts3_b_pro:"Nov 30", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"More new features",
       ts3_b_srv:"Nov 30", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"A freer developer edition",
-      ts3_b_watch:"Nov 30", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"Browser for smartwatches",
+      ts3_b_watch:"Beta · Unreleased", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"Browser for smartwatches",
       ts_apple_t:"Explore more · Apple Special Event", ts_apple_d:"Visit Apple's official Special Event page.",
       ftr_made:"Made by xiaonan",
       cr_kicker:"Credits", cr_title:"Development Team",
@@ -1389,7 +1405,8 @@
   var DL_LINKS = {
     std:"https://wwbfs.lanzouv.com/i4Nb74c7ochc",
     pro:"https://wwbfs.lanzouv.com/iGNQb4c66qpa",
-    srv:"https://wwbfs.lanzouv.com/iPPcP4c66t2f"
+    srv:"https://wwbfs.lanzouv.com/iPPcP4c66t2f",
+    watch:"https://wwbfs.lanzouv.com/iZLwV4fpbxsh"
   };
   function goDl(k){ if (DL_LINKS[k]) location.href = DL_LINKS[k]; }
 
