@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>XiaoNan Browser — 輕快、簡潔、開源。你的下一個瀏覽器。</title>
-<meta name="description" content="XiaoNan Browser（小楠瀏覽器）— 支援 Windows 7 至 Windows 11 的輕量開源瀏覽器。收藏夾、無痕瀏覽、深色模式、下載管理一應俱全。Pro 版新增影片播放與標籤功能，Server 版內建開發者控制台。開發者：xiaonan。">
+<meta name="description" content="XiaoNan Browser（小楠瀏覽器）— 支援 Windows 10 至 Windows 11 的輕量開源瀏覽器。收藏夾、無痕瀏覽、深色模式、下載管理一應俱全。Pro 版新增影片播放與標籤功能，Server 版內建開發者控制台。開發者：xiaonan。">
 <meta name="keywords" content="XiaoNan Browser,小楠瀏覽器,小楠浏览器,瀏覽器,開源瀏覽器,Windows 瀏覽器,免費瀏覽器,輕量瀏覽器,WebView2,影片播放,開發者瀏覽器">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#000000">
@@ -12,11 +12,11 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="XiaoNan Browser">
 <meta property="og:title" content="XiaoNan Browser — 輕快、簡潔、開源。你的下一個瀏覽器。">
-<meta property="og:description" content="支援 Windows 7 至 Windows 11 的輕量開源瀏覽器。3.0.1 已發布，Pro / Server 於 11.30 登場。">
+<meta property="og:description" content="支援 Windows 10 至 Windows 11 的輕量開源瀏覽器。3.0.1 已發布，Pro / Server 於 11.30 登場。">
 <meta property="og:image" content="assets/icon.png">
 <meta property="og:locale" content="zh_Hant">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"XiaoNan Browser","alternateName":"小楠瀏覽器","operatingSystem":"Windows 7, 8, 10, 11","applicationCategory":"BrowserApplication","description":"輕量、開源、支援影片播放的 Windows 瀏覽器。","author":{"@type":"Person","name":"xiaonan"},"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"XiaoNan Browser","alternateName":"小楠瀏覽器","operatingSystem":"Windows 10, 11","applicationCategory":"BrowserApplication","description":"輕量、開源、支援影片播放的 Windows 瀏覽器。","author":{"@type":"Person","name":"xiaonan"},"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}
 </script>
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="preload" as="image" href="assets/wallpaper_web.jpg">
@@ -269,6 +269,10 @@
   .sys-ok .sys-ic{background:transparent;color:#34c759;width:58px;height:58px;border-radius:17px}
   .sys-ok .sys-ic svg{width:34px;height:34px}
   .sys-ok h3{color:#4cd964}
+  .sys-wide{grid-column:1/-1}
+  .sys-warn{border-color:rgba(255,159,10,.3);background:rgba(255,159,10,.05)}
+  .sys-warn .sys-ic{background:rgba(255,159,10,.14);color:#ff9f0a}
+  .sys-warn h3{color:#ffb340}
 
   /* ===== 下載 ===== */
   .download{text-align:center;background:radial-gradient(60% 70% at 50% 100%, rgba(41,151,255,.14), transparent 70%)}
@@ -297,14 +301,15 @@
   }
   .cd-cell .num{font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
   .cd-cell .lbl{font-size:12px;color:var(--text-dim);margin-top:6px}
-  .ts-vers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:920px;margin:38px auto 0}
+  .ts-vers{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1080px;margin:38px auto 0}
   .ts-card{display:block;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px 16px;text-align:left;text-decoration:none;color:inherit;transition:transform .25s ease,border-color .25s ease}
   .ts-card:hover{transform:translateY(-3px);border-color:rgba(130,170,255,.4)}
   .ts-badge{display:inline-block;font-size:11px;letter-spacing:.06em;padding:3px 10px;border-radius:999px;background:rgba(60,220,132,.14);border:1px solid rgba(60,220,132,.35);color:#5ee8a8;margin-bottom:10px}
   .ts-badge-coming{background:rgba(255,170,60,.12);border-color:rgba(255,170,60,.35);color:#ffc06b}
   .ts-card h4{font-size:15px;font-weight:600;margin:0 0 4px}
   .ts-card p{font-size:12px;color:#9a9ab0;margin:0}
-  @media (max-width:700px){.ts-vers{grid-template-columns:1fr}}
+  @media (max-width:900px){.ts-vers{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.ts-vers{grid-template-columns:1fr}}
   .cd-sep{align-self:center;font-size:26px;color:var(--text-dim);font-weight:300;display:none}
   .stay{margin-top:34px;font-size:15px;color:var(--text-dim);font-weight:300}
   .apple-link{
@@ -338,6 +343,7 @@
   .pv-card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-3px)}
   .pv-card .pv-shot{display:block;width:100%;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#000}
   .pv-card.pv-ipad-card .pv-shot{max-height:300px;object-fit:contain}
+  .pv-watch-cards{grid-template-columns:1fr;max-width:300px;margin:0 auto}
   .pv-cap h4{font-size:15px;font-weight:600;margin-top:14px}
   .pv-cap p{font-size:13px;color:var(--text-dim);margin-top:6px;line-height:1.7;font-weight:300}
   @media(max-width:760px){
@@ -469,7 +475,7 @@
     .dev-iphone{width:min(120px,30vw)}
   }
   /* ===== 版本比較 ===== */
-  .ver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto}
+  .ver-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1180px;margin:0 auto}
   .ver-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:24px 20px;text-align:left;transition:transform .25s ease,border-color .25s ease}
   .ver-card:hover{transform:translateY(-3px);border-color:rgba(130,170,255,.35)}
   .ver-badge{display:inline-block;font-size:11px;letter-spacing:.08em;padding:4px 10px;border-radius:999px;background:rgba(41,151,255,.14);border:1px solid rgba(120,170,255,.3);color:#8ab4ff;margin-bottom:12px}
@@ -478,6 +484,7 @@
   .ver-card ul{list-style:none;padding:0;margin:0}
   .ver-card li{font-size:13px;color:#c9c9de;padding:6px 0 6px 20px;position:relative;line-height:1.5}
   .ver-card li::before{content:"";position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  @media (max-width:1080px){.ver-grid{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:860px){.ver-grid{grid-template-columns:1fr}}
   /* ===== Server 大板块 ===== */
   .srv{background:linear-gradient(180deg,#0a0a0f 0%,#0d0d16 55%,#05050a 100%);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
@@ -509,6 +516,7 @@
       <a href="#devices" data-i18n="nav_devices">多裝置</a>
       <a href="#preview" data-i18n="nav_preview">預覽</a>
       <a href="#teaser" data-i18n="nav_event">活動</a>
+      <a href="#teaser" data-i18n="nav_watch">手錶版</a>
       <a href="#download" data-i18n="nav_download">下載</a>
       <a href="#support" data-i18n="nav_support">支援</a>
     </div>
@@ -528,7 +536,7 @@
       <button class="btn btn-primary" id="dlBtn" data-i18n="hero_cta1">免費下載</button>
       <a class="btn btn-ghost" href="#features" data-i18n="hero_cta2">了解更多</a>
     </div>
-    <p class="hero-note" data-i18n="hero_note">版本 1.3.0 · 140 MB · 支援 Windows 7 – 11</p>
+    <p class="hero-note" data-i18n="hero_note">版本 1.3.0 · 140 MB · 支援 Windows 10 – 11</p>
   </div>
 
   <!-- 瀏覽器視窗 mockup -->
@@ -657,6 +665,17 @@
 
       <div class="dev-card reveal" onclick="showToast(I18N[lang].pv_none)" style="cursor:pointer">
         <div class="dev-head">
+          <span class="svg-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="8.5" y="2" width="7" height="3.5" rx="1" stroke="#64d2ff" stroke-width="1.5"/><rect x="8.5" y="18.5" width="7" height="3.5" rx="1" stroke="#64d2ff" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="#64d2ff" stroke-width="1.5"/><path d="M12 10v2l1.5 1" stroke="#64d2ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h3>Watch</h3><div class="dev-sub">Smartwatch</div></div>
+        </div>
+        <div class="brow brow-app brow-phone brow-shot-wrap">
+          <img class="brow-shot" src="assets/watch.png" alt="Watch 版預覽" loading="lazy" decoding="async">
+        </div>
+        <div class="dev-status st-dev"><i></i><span data-i18n="dv_s_watch">手錶版 · 正在開發</span><span class="dev-pv-none">暫無預覽</span></div>
+      </div>
+
+      <div class="dev-card reveal" onclick="showToast(I18N[lang].pv_none)" style="cursor:pointer">
+        <div class="dev-head">
           <span class="svg-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 10h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7z" stroke="#3ddc84" stroke-width="1.5"/><circle cx="12" cy="6" r="3" stroke="#3ddc84" stroke-width="1.5"/><path d="M4 8l-2-3M20 8l2-3" stroke="#3ddc84" stroke-width="1.5" stroke-linecap="round"/></svg></span>
           <div><h3>Android</h3><div class="dev-sub">通用版</div></div>
         </div>
@@ -680,7 +699,7 @@
     <div class="sys-grid">
       <div class="sys-card reveal">
         <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div><h3 data-i18n="sy1_t">Windows 7 – 11</h3><p data-i18n="sy1_d">支援 Windows 7 / 8 / 10 / 11（x64），老電腦也跑得動。</p></div>
+        <div><h3 data-i18n="sy1_t">Windows 10 – 11</h3><p data-i18n="sy1_d">支援 Windows 10 / 11（x64）。</p></div>
       </div>
       <div class="sys-card reveal">
         <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M16.5 12.9c0-2.6 2.1-3.8 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.3 2.5 1.3-.1 1.8-.8 3.4-.8s2 .8 3.4.8c1.4 0 2.3-1.2 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.8-4zM14.2 5.6c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2.1-1.1 3.3 1.1.1 2.3-.6 3-1.6z"/></svg></div>
@@ -693,6 +712,10 @@
       <div class="sys-card reveal">
         <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 10h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7z" stroke="#3ddc84" stroke-width="1.5"/><circle cx="12" cy="6" r="3" stroke="#3ddc84" stroke-width="1.5"/><path d="M4 8l-2-3M20 8l2-3" stroke="#3ddc84" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div><h3 data-i18n="sy_and_t">Android 14 及以上</h3><p data-i18n="sy_and_d">支援 Android 14 及更新版本。</p></div>
+      </div>
+      <div class="sys-card sys-wide sys-warn reveal">
+        <div class="sys-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 10.5l2 2 4-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h3 data-i18n="sy7_t">Windows 7 專用版</h3><p data-i18n="sy7_d">正在開發中，照顧仍舊使用舊系統的電腦。</p></div>
       </div>
     </div>
     <div class="sys-feat">
@@ -717,7 +740,7 @@
   <div class="wrap">
     <div class="sec-title reveal">
       <div class="kicker" data-i18n="ver_kicker">版本比較</div>
-      <h2 data-i18n="ver_title">三個版本，各有擅場。</h2>
+      <h2 data-i18n="ver_title">四個版本，各有擅場。</h2>
       <p data-i18n="ver_sub">選一款最適合你的小楠瀏覽器。</p>
     </div>
     <div class="ver-grid">
@@ -749,6 +772,16 @@
           <li data-i18n="ver_f1_srv">開發者控制台（F12）</li>
           <li data-i18n="ver_f2_srv">完整影片播放 + 觸屏優化</li>
           <li data-i18n="ver_f3_srv">預設深色模式，為開發者而生</li>
+        </ul>
+      </div>
+      <div class="ver-card reveal">
+        <span class="ver-badge" data-i18n="ver_b_watch">手錶版</span>
+        <h3 data-i18n="ver_n_watch">XiaoNan Browser Watch</h3>
+        <p class="ver-desc" data-i18n="ver_d_watch">手錶專用瀏覽器。</p>
+        <ul>
+          <li data-i18n="ver_f1_watch">手錶專用介面，抬腕即用</li>
+          <li data-i18n="ver_f2_watch">輕量省電，長時間待機</li>
+          <li data-i18n="ver_f3_watch">11.30 登場</li>
         </ul>
       </div>
     </div>
@@ -835,6 +868,11 @@
         <h4 data-i18n="ts3_n_pro">XiaoNan Browser Pro</h4>
         <p data-i18n="ts3_d_pro">更多的新功能</p>
       </a>
+      <a class="ts-card" href="javascript:void(0)" onclick="showToast(I18N[lang].toast_dl)">
+        <span class="ts-badge ts-badge-coming" data-i18n="ts3_b_watch">11.30 發布</span>
+        <h4 data-i18n="ts3_n_watch">XiaoNan Browser Watch</h4>
+        <p data-i18n="ts3_d_watch">手錶專用瀏覽器</p>
+      </a>
       <a class="ts-card" href="https://wwbfs.lanzouv.com/i4Nb74c7ochc">
         <span class="ts-badge" data-i18n="ts3_b_std">已發布</span>
         <h4 data-i18n="ts3_n_std">XiaoNan Browser 3.0.1</h4>
@@ -858,8 +896,8 @@
   <div class="wrap">
     <div class="sec-title reveal">
       <div class="kicker" data-i18n="pv_kicker">開發預覽</div>
-      <h2 data-i18n="pv_t2">iOS 版 · 開發中預覽</h2>
-      <p data-i18n="pv_sub">小楠瀏覽器，正在登陸 iPhone 與 iPad。</p>
+      <h2 data-i18n="pv_t2">跨裝置 · 開發中預覽</h2>
+      <p data-i18n="pv_sub">小楠瀏覽器，正在登陸 iPhone、iPad 與手錶。</p>
     </div>
 
     <div class="pv-block reveal">
@@ -902,6 +940,20 @@
         <div class="pv-card pv-ipad-card">
           <img class="pv-shot" src="assets/ios/03.png" alt="iPad 瀏覽記錄" loading="lazy" decoding="async">
           <div class="pv-cap"><h4 data-i18n="pv_ip3_t">瀏覽記錄</h4><p data-i18n="pv_ip3_d">平板上也能快速找回歷史瀏覽。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-block reveal" id="pv-watch">
+      <div class="pv-block-head">
+        <span class="pv-badge">Watch · Smartwatch</span>
+        <h3 data-i18n="pv_w_t">Watch。抬腕之間。</h3>
+        <p data-i18n="pv_w_d">手錶上的小楠瀏覽器，抬腕即可搜尋與查看。</p>
+      </div>
+      <div class="pv-cards pv-watch-cards">
+        <div class="pv-card">
+          <img class="pv-shot" src="assets/watch.png" alt="Watch 版預覽" loading="lazy" decoding="async">
+          <div class="pv-cap"><h4 data-i18n="pv_w1_t">手錶首頁</h4><p data-i18n="pv_w1_d">hello 與搜尋框，抬腕一覽無遺。</p></div>
         </div>
       </div>
     </div>
@@ -1009,7 +1061,7 @@
 <div id="pvModal">
   <div class="pv-box">
     <div class="pv-head">
-      <h3 data-i18n="pv_title">iOS 版 · 開發中預覽</h3>
+      <h3 data-i18n="pv_title">開發中預覽</h3>
       <span class="pv-hint" data-i18n="pv_hint">上下滑動瀏覽</span>
       <button class="pv-close" onclick="closePv()" aria-label="close">&#x2715;</button>
     </div>
@@ -1039,12 +1091,12 @@
   var I18N = {
     zh: {
       brand:"XiaoNan Browser",
-      nav_features:"功能", nav_devices:"多裝置", nav_preview:"預覽", nav_event:"活動", nav_download:"下載", nav_support:"支援",
+      nav_features:"功能", nav_devices:"多裝置", nav_preview:"預覽", nav_event:"活動", nav_watch:"手錶版", nav_download:"下載", nav_support:"支援",
       hero_eyebrow:"由 xiaonan 開發",
       hero_title:"XiaoNan Browser。",
       hero_sub:"輕快、簡潔、開源。你的下一個瀏覽器。",
       hero_cta1:"免費下載", hero_cta2:"了解更多",
-      hero_note:"版本 1.3.0 · 140 MB · 支援 Windows 7 – 11",
+      hero_note:"版本 1.3.0 · 140 MB · 支援 Windows 10 – 11",
       ft_kicker:"功能", ft_title:"恰到好處。剛剛好的瀏覽。", ft_sub:"為日常上網而生的每一項功能，都恰到好處。",
       ft1_t:"收藏。隨心所欲。", ft1_d:"一鍵收藏網頁，重裝系統也不丟。",
       ft2_t:"無痕。來去無蹤。", ft2_d:"不留下歷史、Cookie 或快取。",
@@ -1053,28 +1105,32 @@
       ft5_t:"記錄。隨時回首。", ft5_d:"自動保存最近 200 條瀏覽記錄。",
       ft6_t:"個性。由你定義。", ft6_d:"換壁紙、純色背景、背景模糊。",
       dv_kicker:"多裝置", dv_title:"一個瀏覽器。所有裝置。", dv_sub:"無論哪種裝置，畫面都恰到好處。",
-      dv_chip:"支援 Windows 7 / 8 / 10 / 11",
+      dv_chip:"支援 Windows 10 / 11",
       dv_s_mac:"macOS 版 · 暫未開發",
       dv_s_win:"Windows 版 · 已發佈（exe）",
       dv_s_ipad:"iPadOS 版 · 正在開發",
       dv_s_iphone:"iOS 版 · 正在開發",
+      dv_s_watch:"手錶版 · 正在開發",
       dv_s_android:"安卓版 · 暫未開發",
       sy_kicker:"支援", sy_title:"系統需求", sy_sub:"裝得下，就跑得順。",
-      sy1_t:"Windows 7 – 11", sy1_d:"支援 Windows 7 / 8 / 10 / 11（x64），老電腦也跑得動。",
+      sy1_t:"Windows 10 – 11", sy1_d:"支援 Windows 10 / 11（x64）。",
       sy_mac_t:"macOS", sy_mac_d:"支援 macOS Tahoe 及更新版本，原生體驗。",
       sy_ios_t:"iOS 16 – 26", sy_ios_d:"適用於 iPhone 與 iPad，iOS 16 及以上。",
       sy_and_t:"Android 14 及以上", sy_and_d:"支援 Android 14 及更新版本。",
+      sy7_t:"Windows 7 專用版", sy7_d:"正在開發中，照顧仍舊使用舊系統的電腦。",
       sy2_t:"內置 WebView2 內核", sy2_d:"基於 Edge 同款 Chromium 內核，真正開啟任何網站。",
       sy3_t:"完整開源", sy3_d:"程式碼完全開放，想怎麼改都行。",
       sy4_t:"全版本完整支援影片播放", sy4_d:"3.0 / Pro / Server 均完整支援影片播放（B站 / 抖音 / 快手），打開即看。",
       dl_kicker:"下載", dl_title:"下載 XiaoNan Browser", dl_sub:"免費、輕量、開源。現在就開始。",
-      ver_kicker:"版本比較", ver_title:"三個版本，各有擅場。", ver_sub:"選一款最適合你的小楠瀏覽器。",
+      ver_kicker:"版本比較", ver_title:"四個版本，各有擅場。", ver_sub:"選一款最適合你的小楠瀏覽器。",
       ver_b_std:"普通版", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"輕量快速，日常瀏覽首選。",
       ver_f1_std:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_std:"全新 WebView2 內核，安裝包僅 35 MB", ver_f3_std:"資料可一鍵遷移到 Pro / Server",
       ver_b_pro:"Pro 版", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"更多的新功能。",
       ver_f1_pro:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_pro:"標籤功能（Ctrl+Alt+T）", ver_f3_pro:"一鍵遷移 3.0 資料（瀏覽記錄 / 收藏夾）",
       ver_b_srv:"Server 開發者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的開發版。",
       ver_f1_srv:"開發者控制台（F12）", ver_f2_srv:"完整影片播放 + 觸屏優化", ver_f3_srv:"預設深色模式，為開發者而生",
+      ver_b_watch:"手錶版", ver_n_watch:"XiaoNan Browser Watch", ver_d_watch:"手錶專用瀏覽器。",
+      ver_f1_watch:"手錶專用介面，抬腕即用", ver_f2_watch:"輕量省電，長時間待機", ver_f3_watch:"11.30 登場",
       dl_v:"版本 1.3.0", dl_s:"140 MB",
       dl_sign:"發布者：Xiao Nan Account（數位簽章）", dl_dev:"開發者：xiaonan",
       dl_btn:"立即下載",
@@ -1098,6 +1154,7 @@
       ts3_b_std:"已發布", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"輕量快速 · 立即下載",
       ts3_b_pro:"11.30 發布", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"更多的新功能",
       ts3_b_srv:"11.30 發布", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"更自由的開發版",
+      ts3_b_watch:"11.30 發布", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"手錶專用瀏覽器",
       ts_apple_t:"探索更多 · Apple 特別活動", ts_apple_d:"前往 Apple 官方特別活動頁面。",
       ftr_made:"由 xiaonan 製作",
       cr_kicker:"致謝", cr_title:"開發人員清單",
@@ -1106,8 +1163,8 @@
       toast_dl:"安裝包準備中，敬請期待",
       dl_qr_t:"獲取安裝包", dl_qr_d:"安裝包通過 QQ 群提供，加入群組即可下載。",
       dl_qr_copy:"複製群號", dl_qr_join:"前往加群", dl_qr_copied:"已複製群號 1064568519",
-      pv_title:"iOS 版 · 開發中預覽", pv_hint:"上下滑動瀏覽", pv_tag:"查看預覽", pv_none:"預覽圖準備中，敬請期待",
-      pv_kicker:"開發預覽", pv_t2:"iOS 版 · 開發中預覽", pv_sub:"小楠瀏覽器，正在登陸 iPhone 與 iPad。",
+      pv_title:"開發中預覽", pv_hint:"上下滑動瀏覽", pv_tag:"查看預覽", pv_none:"預覽圖準備中，敬請期待",
+      pv_kicker:"開發預覽", pv_t2:"跨裝置 · 開發中預覽", pv_sub:"小楠瀏覽器，正在登陸 iPhone、iPad 與手錶。",
       pv_ph_t:"iPhone。掌心的小楠。", pv_ph_d:"手機上的小楠瀏覽器，保留熟悉的搜尋與壁紙體驗，單手即可操作。",
       pv_ph1_t:"主畫面", pv_ph1_d:"小楠瀏覽器已登上你的主螢幕，一觸即開。",
       pv_ph2_t:"搜尋即答", pv_ph2_d:"搜尋、翻譯、百科，一鍵直達你要的答案。",
@@ -1115,16 +1172,18 @@
       pv_ip_t:"iPad。更大的視野。", pv_ip_d:"平板上的小楠瀏覽器善用每一寸螢幕，多標籤並排、閱讀與多工更從容。",
       pv_ip1_t:"標籤頁管理", pv_ip1_d:"多個分頁一目瞭然，切換更順手。",
       pv_ip2_t:"專屬首頁", pv_ip2_d:"hello 與最近瀏覽，打開就是熟悉的小楠。",
-      pv_ip3_t:"瀏覽記錄", pv_ip3_d:"平板上也能快速找回歷史瀏覽。"
+      pv_ip3_t:"瀏覽記錄", pv_ip3_d:"平板上也能快速找回歷史瀏覽。",
+      pv_w_t:"Watch。抬腕之間。", pv_w_d:"手錶上的小楠瀏覽器，抬腕即可搜尋與查看。",
+      pv_w1_t:"手錶首頁", pv_w1_d:"hello 與搜尋框，抬腕一覽無遺。"
     },
     sc: {
       brand:"XiaoNan Browser",
-      nav_features:"功能", nav_devices:"多装置", nav_preview:"预览", nav_event:"活动", nav_download:"下载", nav_support:"支援",
+      nav_features:"功能", nav_devices:"多装置", nav_preview:"预览", nav_event:"活动", nav_watch:"手表版", nav_download:"下载", nav_support:"支援",
       hero_eyebrow:"由 xiaonan 开发",
       hero_title:"XiaoNan Browser。",
       hero_sub:"轻快、简洁、开源。你的下一个浏览器。",
       hero_cta1:"免费下载", hero_cta2:"了解更多",
-      hero_note:"版本 1.3.0 · 140 MB · 支援 Windows 7 – 11",
+      hero_note:"版本 1.3.0 · 140 MB · 支援 Windows 10 – 11",
       ft_kicker:"功能", ft_title:"恰到好处。刚刚好的浏览。", ft_sub:"为日常上网而生的每一项功能，都恰到好处。",
       ft1_t:"收藏。随心所欲。", ft1_d:"一键收藏网页，重装系统也不丢。",
       ft2_t:"无痕。来去无踪。", ft2_d:"不留下历史、Cookie 或快取。",
@@ -1133,28 +1192,32 @@
       ft5_t:"记录。随时回首。", ft5_d:"自动保存最近 200 条浏览记录。",
       ft6_t:"个性。由你定义。", ft6_d:"换壁纸、纯色背景、背景模糊。",
       dv_kicker:"多装置", dv_title:"一个浏览器。所有装置。", dv_sub:"无论哪种装置，画面都恰到好处。",
-      dv_chip:"支援 Windows 7 / 8 / 10 / 11",
+      dv_chip:"支援 Windows 10 / 11",
       dv_s_mac:"macOS 版 · 暂未开发",
       dv_s_win:"Windows 版 · 已发布（exe）",
       dv_s_ipad:"iPadOS 版 · 正在开发",
       dv_s_iphone:"iOS 版 · 正在开发",
+      dv_s_watch:"手表版 · 正在开发",
       dv_s_android:"安卓版 · 暂未开发",
       sy_kicker:"支援", sy_title:"系统需求", sy_sub:"装得下，就跑得顺。",
-      sy1_t:"Windows 7 – 11", sy1_d:"支援 Windows 7 / 8 / 10 / 11（x64），老电脑也跑得动。",
+      sy1_t:"Windows 10 – 11", sy1_d:"支援 Windows 10 / 11（x64）。",
       sy_mac_t:"macOS", sy_mac_d:"支援 macOS Tahoe 及更新版本，原生体验。",
       sy_ios_t:"iOS 16 – 26", sy_ios_d:"适用于 iPhone 与 iPad，iOS 16 及以上。",
       sy_and_t:"Android 14 及以上", sy_and_d:"支援 Android 14 及更新版本。",
+      sy7_t:"Windows 7 专用版", sy7_d:"正在开发中，照顾仍旧使用旧系统的电脑。",
       sy2_t:"内置 WebView2 内核", sy2_d:"基于 Edge 同款 Chromium 内核，真正开启任何网站。",
       sy3_t:"完整开源", sy3_d:"程式码完全开放，想怎么改都行。",
       sy4_t:"全版本完整支援影片播放", sy4_d:"3.0 / Pro / Server 均完整支援影片播放（B站 / 抖音 / 快手），打开即看。",
       dl_kicker:"下载", dl_title:"下载 XiaoNan Browser", dl_sub:"免费、轻量、开源。现在就开始。",
-      ver_kicker:"版本比较", ver_title:"三个版本，各有擅场。", ver_sub:"选一款最适合你的小楠浏览器。",
+      ver_kicker:"版本比较", ver_title:"四个版本，各有擅场。", ver_sub:"选一款最适合你的小楠浏览器。",
       ver_b_std:"普通版", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"轻量快速，日常浏览首选。",
       ver_f1_std:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_std:"全新 WebView2 内核，安装包仅 35 MB", ver_f3_std:"资料可一键迁移到 Pro / Server",
       ver_b_pro:"Pro 版", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"更多的新功能。",
       ver_f1_pro:"完整影片播放（B站 / 抖音 / 快手）", ver_f2_pro:"标签功能（Ctrl+Alt+T）", ver_f3_pro:"一键迁移 3.0 资料（浏览记录 / 收藏夹）",
       ver_b_srv:"Server 开发者版", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"更自由的开发版。",
       ver_f1_srv:"开发者控制台（F12）", ver_f2_srv:"完整影片播放 + 触屏优化", ver_f3_srv:"预设深色模式，为开发者而生",
+      ver_b_watch:"手表版", ver_n_watch:"XiaoNan Browser Watch", ver_d_watch:"手表专用浏览器。",
+      ver_f1_watch:"手表专用界面，抬腕即用", ver_f2_watch:"轻量省电，长时间待机", ver_f3_watch:"11.30 登场",
       dl_v:"版本 1.3.0", dl_s:"140 MB",
       dl_sign:"发布者：Xiao Nan Account（数位签章）", dl_dev:"开发者：xiaonan",
       dl_btn:"立即下载",
@@ -1178,6 +1241,7 @@
       ts3_b_std:"已发布", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"轻量快速 · 立即下载",
       ts3_b_pro:"11.30 发布", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"更多的新功能",
       ts3_b_srv:"11.30 发布", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"更自由的开发版",
+      ts3_b_watch:"11.30 发布", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"手表专用浏览器",
       ts_apple_t:"探索更多 · Apple 特别活动", ts_apple_d:"前往 Apple 官方特别活动页面。",
       ftr_made:"由 xiaonan 制作",
       cr_kicker:"致谢", cr_title:"开发人员清单",
@@ -1186,8 +1250,8 @@
       toast_dl:"安装包准备中，敬请期待",
       dl_qr_t:"获取安装包", dl_qr_d:"安装包通过 QQ 群提供，加入群组即可下载。",
       dl_qr_copy:"复制群号", dl_qr_join:"前往加群", dl_qr_copied:"已复制群号 1064568519",
-      pv_title:"iOS 版 · 开发中预览", pv_hint:"上下滑动浏览", pv_tag:"查看预览", pv_none:"预览图准备中，敬请期待",
-      pv_kicker:"开发预览", pv_t2:"iOS 版 · 开发中预览", pv_sub:"小楠浏览器，正在登陆 iPhone 与 iPad。",
+      pv_title:"开发中预览", pv_hint:"上下滑动浏览", pv_tag:"查看预览", pv_none:"预览图准备中，敬请期待",
+      pv_kicker:"开发预览", pv_t2:"跨设备 · 开发中预览", pv_sub:"小楠浏览器，正在登陆 iPhone、iPad 与手表。",
       pv_ph_t:"iPhone。掌心的小楠。", pv_ph_d:"手机上的小楠浏览器，保留熟悉的搜寻与壁纸体验，单手即可操作。",
       pv_ph1_t:"主画面", pv_ph1_d:"小楠浏览器已登上你的主萤幕，一触即开。",
       pv_ph2_t:"搜寻即答", pv_ph2_d:"搜寻、翻译、百科，一键直达你要的答案。",
@@ -1195,16 +1259,18 @@
       pv_ip_t:"iPad。更大的视野。", pv_ip_d:"平板上的小楠浏览器善用每一寸萤幕，多标签并排、阅读与多工更从容。",
       pv_ip1_t:"标签页管理", pv_ip1_d:"多个分页一目了然，切换更顺手。",
       pv_ip2_t:"专属首页", pv_ip2_d:"hello 与最近浏览，打开就是熟悉的小楠。",
-      pv_ip3_t:"浏览记录", pv_ip3_d:"平板上也能快速找回历史浏览。"
+      pv_ip3_t:"浏览记录", pv_ip3_d:"平板上也能快速找回历史浏览。",
+      pv_w_t:"Watch。抬腕之间。", pv_w_d:"手表上的小楠浏览器，抬腕即可搜索与查看。",
+      pv_w1_t:"手表首页", pv_w1_d:"hello 与搜索框，抬腕一览无余。"
     },
     en: {
       brand:"XiaoNan Browser",
-      nav_features:"Features", nav_devices:"Devices", nav_preview:"Preview", nav_event:"Event", nav_download:"Download", nav_support:"Support",
+      nav_features:"Features", nav_devices:"Devices", nav_preview:"Preview", nav_event:"Event", nav_watch:"Watch", nav_download:"Download", nav_support:"Support",
       hero_eyebrow:"by xiaonan",
       hero_title:"XiaoNan Browser.",
       hero_sub:"Fast. Simple. Open source. Your next browser.",
       hero_cta1:"Download Free", hero_cta2:"Learn more",
-      hero_note:"Version 1.3.0 · 140 MB · Windows 7 – 11",
+      hero_note:"Version 1.3.0 · 140 MB · Windows 10 – 11",
       ft_kicker:"Features", ft_title:"Just right. Just the browser you need.", ft_sub:"Every feature, tuned for everyday browsing.",
       ft1_t:"Save. Your way.", ft1_d:"One-click bookmarks that survive reinstalls.",
       ft2_t:"Invisible. In and out.", ft2_d:"No history, cookies or cache left behind.",
@@ -1213,28 +1279,32 @@
       ft5_t:"History. Revisit anytime.", ft5_d:"Keeps your latest 200 pages.",
       ft6_t:"Yours. Your call.", ft6_d:"Custom wallpaper, solid color or blur.",
       dv_kicker:"Devices", dv_title:"One browser. Every device.", dv_sub:"Looks great on any screen.",
-      dv_chip:"Windows 7 / 8 / 10 / 11 supported",
+      dv_chip:"Windows 10 / 11 supported",
       dv_s_mac:"macOS · Not yet",
       dv_s_win:"Windows · Released (exe)",
       dv_s_ipad:"iPadOS · In development",
       dv_s_iphone:"iOS · In development",
+      dv_s_watch:"Watch · In development",
       dv_s_android:"Android · Not yet",
       sy_kicker:"Support", sy_title:"System requirements", sy_sub:"If it runs, it runs well.",
-      sy1_t:"Windows 7 – 11", sy1_d:"Supports Windows 7 / 8 / 10 / 11 (x64), even on older PCs.",
+      sy1_t:"Windows 10 – 11", sy1_d:"Supports Windows 10 / 11 (x64).",
       sy_mac_t:"macOS", sy_mac_d:"macOS Tahoe and later, native experience.",
       sy_ios_t:"iOS 16 – 26", sy_ios_d:"For iPhone & iPad, iOS 16 and above.",
       sy_and_t:"Android 14+", sy_and_d:"Android 14 and later.",
+      sy7_t:"Windows 7 dedicated", sy7_d:"In development, for PCs still on older systems.",
       sy2_t:"Built-in WebView2 engine", sy2_d:"Edge's Chromium engine inside. Opens any website.",
       sy3_t:"Fully open source", sy3_d:"The code is completely open. Modify it your way.",
       sy4_t:"Full video playback on all editions", sy4_d:"3.0, Pro and Server all play video (Bilibili / Douyin / Kuaishou) out of the box.",
       dl_kicker:"Download", dl_title:"Download XiaoNan Browser", dl_sub:"Free. Light. Open source. Get started now.",
-      ver_kicker:"Compare Versions", ver_title:"Three versions, each with its own edge.", ver_sub:"Pick the XiaoNan Browser that fits you best.",
+      ver_kicker:"Compare Versions", ver_title:"Four versions, each with its own edge.", ver_sub:"Pick the XiaoNan Browser that fits you best.",
       ver_b_std:"Standard", ver_n_std:"XiaoNan Browser 3.0", ver_d_std:"Light and fast. The everyday pick.",
       ver_f1_std:"Full video playback (Bilibili / Douyin / Kuaishou)", ver_f2_std:"New WebView2 engine — installer only 35 MB", ver_f3_std:"One-click migration to Pro / Server",
       ver_b_pro:"Pro", ver_n_pro:"XiaoNan Browser Pro", ver_d_pro:"More new features.",
       ver_f1_pro:"Full video playback (Bilibili / Douyin / Kuaishou)", ver_f2_pro:"Tab bookmarks (Ctrl+Alt+T)", ver_f3_pro:"One-click migration from 3.0 (history / bookmarks)",
       ver_b_srv:"Server Dev", ver_n_srv:"XiaoNan Browser Server", ver_d_srv:"A freer developer edition.",
       ver_f1_srv:"Developer Console (F12)", ver_f2_srv:"Full video playback + touch optimization", ver_f3_srv:"Dark mode by default, built for developers",
+      ver_b_watch:"Watch", ver_n_watch:"XiaoNan Browser Watch", ver_d_watch:"Browser for smartwatches.",
+      ver_f1_watch:"Watch-optimized UI, raise to view", ver_f2_watch:"Light and efficient, long standby", ver_f3_watch:"Arrives Nov 30",
       dl_v:"Version 1.3.0", dl_s:"140 MB",
       dl_sign:"Publisher: Xiao Nan Account (signed)", dl_dev:"Developer: xiaonan",
       dl_btn:"Download Now",
@@ -1258,6 +1328,7 @@
       ts3_b_std:"Released", ts3_n_std:"XiaoNan Browser 3.0.1", ts3_d_std:"Light & fast · Download now",
       ts3_b_pro:"Nov 30", ts3_n_pro:"XiaoNan Browser Pro", ts3_d_pro:"More new features",
       ts3_b_srv:"Nov 30", ts3_n_srv:"XiaoNan Browser Server", ts3_d_srv:"A freer developer edition",
+      ts3_b_watch:"Nov 30", ts3_n_watch:"XiaoNan Browser Watch", ts3_d_watch:"Browser for smartwatches",
       ts_apple_t:"Explore more · Apple Special Event", ts_apple_d:"Visit Apple's official Special Event page.",
       ftr_made:"Made by xiaonan",
       cr_kicker:"Credits", cr_title:"Development Team",
@@ -1266,8 +1337,8 @@
       toast_dl:"Installer coming soon",
       dl_qr_t:"Get the installer", dl_qr_d:"The installer is shared in our QQ group. Join to download.",
       dl_qr_copy:"Copy group no.", dl_qr_join:"Join group", dl_qr_copied:"Copied: 1064568519",
-      pv_title:"iOS · In-development preview", pv_hint:"Scroll to browse", pv_tag:"Preview", pv_none:"Preview coming soon",
-      pv_kicker:"Preview", pv_t2:"iOS · In-development preview", pv_sub:"XiaoNan Browser is coming to iPhone and iPad.",
+      pv_title:"In-development preview", pv_hint:"Scroll to browse", pv_tag:"Preview", pv_none:"Preview coming soon",
+      pv_kicker:"Preview", pv_t2:"Cross-device · In-development preview", pv_sub:"XiaoNan Browser is coming to iPhone, iPad and Watch.",
       pv_ph_t:"iPhone. XiaoNan in your palm.", pv_ph_d:"The familiar search-and-wallpaper experience, now one-handed on your phone.",
       pv_ph1_t:"Home screen", pv_ph1_d:"XiaoNan Browser on your home screen — one tap away.",
       pv_ph2_t:"Search, answered", pv_ph2_d:"Search, translate and look up — straight to the answer.",
@@ -1275,7 +1346,9 @@
       pv_ip_t:"iPad. A wider view.", pv_ip_d:"Made for the bigger canvas — tabs side by side, reading and multitasking with room to breathe.",
       pv_ip1_t:"Tab manager", pv_ip1_d:"All your tabs at a glance, switching with ease.",
       pv_ip2_t:"Your home", pv_ip2_d:"hello and recent pages — XiaoNan, right where you left it.",
-      pv_ip3_t:"History", pv_ip3_d:"Find past pages quickly on the big canvas."
+      pv_ip3_t:"History", pv_ip3_d:"Find past pages quickly on the big canvas.",
+      pv_w_t:"Watch. On your wrist.", pv_w_d:"XiaoNan on your wrist — search and check pages with a raise.",
+      pv_w1_t:"Watch home", pv_w1_d:"hello and the search bar, right on your wrist."
     }
   };
 
